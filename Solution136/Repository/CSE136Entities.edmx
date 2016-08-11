@@ -348,6 +348,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_schedule_tutor_schedule_day">
+          <End Role="schedule_day" Type="Self.schedule_day" Multiplicity="1" />
+          <End Role="schedule_tutor" Type="Self.schedule_tutor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="schedule_day">
+              <PropertyRef Name="schedule_day_id" />
+            </Principal>
+            <Dependent Role="schedule_tutor">
+              <PropertyRef Name="availability_day_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_schedule_tutor_schedule_time">
+          <End Role="schedule_time" Type="Self.schedule_time" Multiplicity="1" />
+          <End Role="schedule_tutor" Type="Self.schedule_tutor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="schedule_time">
+              <PropertyRef Name="schedule_time_id" />
+            </Principal>
+            <Dependent Role="schedule_tutor">
+              <PropertyRef Name="availability_time_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_schedule_tutor_student">
           <End Role="student" Type="Self.student" Multiplicity="1" />
           <End Role="schedule_tutor" Type="Self.schedule_tutor" Multiplicity="*" />
@@ -530,6 +554,14 @@
             <End Role="course_schedule" EntitySet="course_schedule" />
             <End Role="schedule_tutor" EntitySet="schedule_tutor" />
           </AssociationSet>
+          <AssociationSet Name="FK_schedule_tutor_schedule_day" Association="Self.FK_schedule_tutor_schedule_day">
+            <End Role="schedule_day" EntitySet="schedule_day" />
+            <End Role="schedule_tutor" EntitySet="schedule_tutor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_schedule_tutor_schedule_time" Association="Self.FK_schedule_tutor_schedule_time">
+            <End Role="schedule_time" EntitySet="schedule_time" />
+            <End Role="schedule_tutor" EntitySet="schedule_tutor" />
+          </AssociationSet>
           <AssociationSet Name="FK_schedule_tutor_student" Association="Self.FK_schedule_tutor_student">
             <End Role="student" EntitySet="student" />
             <End Role="schedule_tutor" EntitySet="schedule_tutor" />
@@ -646,6 +678,7 @@
           <Property Name="schedule_day_id" Type="Int32" Nullable="false" />
           <Property Name="schedule_day1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="course_schedule" Relationship="Self.FK_course_schedule_schedule_day" FromRole="schedule_day" ToRole="course_schedule" />
+          <NavigationProperty Name="schedule_tutor" Relationship="cse136Model.FK_schedule_tutor_schedule_day" FromRole="schedule_day" ToRole="schedule_tutor" />
         </EntityType>
         <EntityType Name="schedule_time">
           <Key>
@@ -654,6 +687,7 @@
           <Property Name="schedule_time_id" Type="Int32" Nullable="false" />
           <Property Name="schedule_time1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="course_schedule" Relationship="Self.FK_course_schedule_schedule_time" FromRole="schedule_time" ToRole="course_schedule" />
+          <NavigationProperty Name="schedule_tutor" Relationship="cse136Model.FK_schedule_tutor_schedule_time" FromRole="schedule_time" ToRole="schedule_tutor" />
         </EntityType>
         <EntityType Name="schedule_tutor">
           <Key>
@@ -666,6 +700,8 @@
           <Property Name="availability_time_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="course_schedule" Relationship="Self.FK_schedule_tutor_course_schedule" FromRole="schedule_tutor" ToRole="course_schedule" />
           <NavigationProperty Name="student" Relationship="Self.FK_schedule_tutor_student" FromRole="schedule_tutor" ToRole="student" />
+          <NavigationProperty Name="schedule_day" Relationship="cse136Model.FK_schedule_tutor_schedule_day" FromRole="schedule_tutor" ToRole="schedule_day" />
+          <NavigationProperty Name="schedule_time" Relationship="cse136Model.FK_schedule_tutor_schedule_time" FromRole="schedule_tutor" ToRole="schedule_time" />
         </EntityType>
         <EntityType Name="staff">
           <Key>
@@ -1039,6 +1075,14 @@
             <Parameter Name="shoe_size" Mode="In" Type="Double" />
             <Parameter Name="weight" Mode="In" Type="Int32" />
           </FunctionImport>
+          <AssociationSet Name="FK_schedule_tutor_schedule_day" Association="cse136Model.FK_schedule_tutor_schedule_day">
+            <End Role="schedule_day" EntitySet="schedule_day" />
+            <End Role="schedule_tutor" EntitySet="schedule_tutor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_schedule_tutor_schedule_time" Association="cse136Model.FK_schedule_tutor_schedule_time">
+            <End Role="schedule_time" EntitySet="schedule_time" />
+            <End Role="schedule_tutor" EntitySet="schedule_tutor" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="ic_136_test_get_ta_info_Result">
           <Property Type="Int32" Name="ta_id" Nullable="false" />
@@ -1096,6 +1140,30 @@
           <Property Type="Double" Name="shoe_size" Nullable="false" />
           <Property Type="Int32" Name="weight" Nullable="false" />
         </ComplexType>
+        <Association Name="FK_schedule_tutor_schedule_day">
+          <End Type="cse136Model.schedule_day" Role="schedule_day" Multiplicity="1" />
+          <End Type="cse136Model.schedule_tutor" Role="schedule_tutor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="schedule_day">
+              <PropertyRef Name="schedule_day_id" />
+            </Principal>
+            <Dependent Role="schedule_tutor">
+              <PropertyRef Name="availability_day_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_schedule_tutor_schedule_time">
+          <End Type="cse136Model.schedule_time" Role="schedule_time" Multiplicity="1" />
+          <End Type="cse136Model.schedule_tutor" Role="schedule_tutor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="schedule_time">
+              <PropertyRef Name="schedule_time_id" />
+            </Principal>
+            <Dependent Role="schedule_tutor">
+              <PropertyRef Name="availability_time_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

@@ -36,6 +36,8 @@
         <AssociationConnector Association="cse136Model.FK_TeachingAssistant_TeachingAssitantType" ManuallyRouted="false" />
         <AssociationConnector Association="cse136Model.course_schedule_ta" ManuallyRouted="false" />
         <AssociationConnector Association="cse136Model.prerequisite" ManuallyRouted="false" />
+        <AssociationConnector Association="cse136Model.FK_schedule_tutor_schedule_day" />
+        <AssociationConnector Association="cse136Model.FK_schedule_tutor_schedule_time" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

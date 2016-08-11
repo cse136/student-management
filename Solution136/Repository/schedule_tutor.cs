@@ -21,5 +21,7 @@ namespace Repository
     
         public virtual course_schedule course_schedule { get; set; }
         public virtual student student { get; set; }
+        public virtual schedule_day schedule_day { get; set; }
+        public virtual schedule_time schedule_time { get; set; }
     }
 }

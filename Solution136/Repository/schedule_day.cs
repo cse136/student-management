@@ -18,6 +18,7 @@ namespace Repository
         public schedule_day()
         {
             this.course_schedule = new HashSet<course_schedule>();
+            this.schedule_tutor = new HashSet<schedule_tutor>();
         }
     
         public int schedule_day_id { get; set; }
@@ -25,5 +26,7 @@ namespace Repository
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<course_schedule> course_schedule { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<schedule_tutor> schedule_tutor { get; set; }
     }
 }

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="83c664a8a66049b0a669f621720c5948" Name="Diagram1" ZoomLevel="55">
+        <EntityTypeShape EntityType="cse136Model.admin" Width="1.5" PointX="9.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="cse136Model.building" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="cse136Model.class_review" Width="1.5" PointX="7.5" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="cse136Model.classroom" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="cse136Model.course" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="cse136Model.course_schedule" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="cse136Model.enrollment" Width="1.5" PointX="7.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="cse136Model.instructor" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="cse136Model.schedule_day" Width="1.5" PointX="3" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="cse136Model.schedule_time" Width="1.5" PointX="3" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="cse136Model.schedule_tutor" Width="1.5" PointX="7.5" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="cse136Model.staff" Width="1.5" PointX="9.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="cse136Model.student" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="cse136Model.sysdiagram" Width="1.5" PointX="11.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="cse136Model.TeachingAssistant" Width="1.5" PointX="10.5" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="cse136Model.TeachingAssistantType" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="cse136Model.FK_classroom_building" ManuallyRouted="false" />
+        <AssociationConnector Association="cse136Model.FK_class_review_course_schedule" ManuallyRouted="false" />
+        <AssociationConnector Association="cse136Model.FK_class_review_student" ManuallyRouted="false" />
+        <AssociationConnector Association="cse136Model.FK_course_schedule_classroom" ManuallyRouted="false" />
+        <AssociationConnector Association="cse136Model.FK_course_schedule_course" ManuallyRouted="false" />
+        <AssociationConnector Association="cse136Model.FK_course_schedule_instructor" ManuallyRouted="false" />
+        <AssociationConnector Association="cse136Model.FK_course_schedule_schedule_day" ManuallyRouted="false" />
+        <AssociationConnector Association="cse136Model.FK_course_schedule_schedule_time" ManuallyRouted="false" />
+        <AssociationConnector Association="cse136Model.FK_enrollment_course_schedule" ManuallyRouted="false" />
+        <AssociationConnector Association="cse136Model.FK_schedule_tutor_course_schedule" ManuallyRouted="false" />
+        <AssociationConnector Association="cse136Model.FK_enrollment_student" ManuallyRouted="false" />
+        <AssociationConnector Association="cse136Model.FK_schedule_tutor_student" ManuallyRouted="false" />
+        <AssociationConnector Association="cse136Model.FK_TeachingAssistant_TeachingAssitantType" ManuallyRouted="false" />
+        <AssociationConnector Association="cse136Model.course_schedule_ta" ManuallyRouted="false" />
+        <AssociationConnector Association="cse136Model.prerequisite" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

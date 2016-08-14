@@ -151,6 +151,7 @@
     <Compile Include="TeachingAssistantType.cs">
       <DependentUpon>CSE136Entities.tt</DependentUpon>
     </Compile>
+    <Compile Include="TARepository.cs" />
     <Compile Include="TutorRepository.cs" />
   </ItemGroup>
   <ItemGroup>

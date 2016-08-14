@@ -9,7 +9,6 @@
         <EntityTypeShape EntityType="cse136Model.building" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="cse136Model.class_review" Width="1.5" PointX="7.5" PointY="6.5" IsExpanded="true" />
         <EntityTypeShape EntityType="cse136Model.classroom" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="cse136Model.course" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="cse136Model.course_schedule" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="cse136Model.enrollment" Width="1.5" PointX="7.5" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="cse136Model.instructor" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
@@ -25,7 +24,6 @@
         <AssociationConnector Association="cse136Model.FK_class_review_course_schedule" ManuallyRouted="false" />
         <AssociationConnector Association="cse136Model.FK_class_review_student" ManuallyRouted="false" />
         <AssociationConnector Association="cse136Model.FK_course_schedule_classroom" ManuallyRouted="false" />
-        <AssociationConnector Association="cse136Model.FK_course_schedule_course" ManuallyRouted="false" />
         <AssociationConnector Association="cse136Model.FK_course_schedule_instructor" ManuallyRouted="false" />
         <AssociationConnector Association="cse136Model.FK_course_schedule_schedule_day" ManuallyRouted="false" />
         <AssociationConnector Association="cse136Model.FK_course_schedule_schedule_time" ManuallyRouted="false" />
@@ -35,9 +33,11 @@
         <AssociationConnector Association="cse136Model.FK_schedule_tutor_student" ManuallyRouted="false" />
         <AssociationConnector Association="cse136Model.FK_TeachingAssistant_TeachingAssitantType" ManuallyRouted="false" />
         <AssociationConnector Association="cse136Model.course_schedule_ta" ManuallyRouted="false" />
-        <AssociationConnector Association="cse136Model.prerequisite" ManuallyRouted="false" />
         <AssociationConnector Association="cse136Model.FK_schedule_tutor_schedule_day" />
         <AssociationConnector Association="cse136Model.FK_schedule_tutor_schedule_time" />
+        <EntityTypeShape EntityType="cse136Model.course" Width="1.5" PointX="0.75" PointY="1" />
+        <AssociationConnector Association="cse136Model.FK_course_schedule_course" />
+        <AssociationConnector Association="cse136Model.prerequisite" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

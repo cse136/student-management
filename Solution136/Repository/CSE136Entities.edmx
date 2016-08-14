@@ -615,18 +615,6 @@
           <NavigationProperty Name="building" Relationship="Self.FK_classroom_building" FromRole="classroom" ToRole="building" />
           <NavigationProperty Name="course_schedule" Relationship="Self.FK_course_schedule_classroom" FromRole="classroom" ToRole="course_schedule" />
         </EntityType>
-        <EntityType Name="course">
-          <Key>
-            <PropertyRef Name="course_id" />
-          </Key>
-          <Property Name="course_id" Type="Int32" Nullable="false" />
-          <Property Name="course_title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="course_level" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="course_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="course_schedule" Relationship="Self.FK_course_schedule_course" FromRole="course" ToRole="course_schedule" />
-          <NavigationProperty Name="course1" Relationship="Self.prerequisite" FromRole="course" ToRole="course1" />
-          <NavigationProperty Name="courses" Relationship="Self.prerequisite" FromRole="course1" ToRole="course" />
-        </EntityType>
         <EntityType Name="course_schedule">
           <Key>
             <PropertyRef Name="schedule_id" />
@@ -642,13 +630,13 @@
           <Property Name="instructor_id" Type="Int32" />
           <NavigationProperty Name="class_review" Relationship="Self.FK_class_review_course_schedule" FromRole="course_schedule" ToRole="class_review" />
           <NavigationProperty Name="classroom" Relationship="Self.FK_course_schedule_classroom" FromRole="course_schedule" ToRole="classroom" />
-          <NavigationProperty Name="course" Relationship="Self.FK_course_schedule_course" FromRole="course_schedule" ToRole="course" />
           <NavigationProperty Name="instructor" Relationship="Self.FK_course_schedule_instructor" FromRole="course_schedule" ToRole="instructor" />
           <NavigationProperty Name="schedule_day" Relationship="Self.FK_course_schedule_schedule_day" FromRole="course_schedule" ToRole="schedule_day" />
           <NavigationProperty Name="schedule_time" Relationship="Self.FK_course_schedule_schedule_time" FromRole="course_schedule" ToRole="schedule_time" />
           <NavigationProperty Name="enrollments" Relationship="Self.FK_enrollment_course_schedule" FromRole="course_schedule" ToRole="enrollment" />
           <NavigationProperty Name="schedule_tutor" Relationship="Self.FK_schedule_tutor_course_schedule" FromRole="course_schedule" ToRole="schedule_tutor" />
           <NavigationProperty Name="TeachingAssistants" Relationship="Self.course_schedule_ta" FromRole="course_schedule" ToRole="TeachingAssistant" />
+          <NavigationProperty Name="course" Relationship="cse136Model.FK_course_schedule_course" FromRole="course_schedule" ToRole="course" />
         </EntityType>
         <EntityType Name="enrollment">
           <Key>
@@ -804,18 +792,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_course_schedule_course">
-          <End Role="course" Type="Self.course" Multiplicity="1" />
-          <End Role="course_schedule" Type="Self.course_schedule" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="course">
-              <PropertyRef Name="course_id" />
-            </Principal>
-            <Dependent Role="course_schedule">
-              <PropertyRef Name="course_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_course_schedule_instructor">
           <End Role="instructor" Type="Self.instructor" Multiplicity="0..1" />
           <End Role="course_schedule" Type="Self.course_schedule" Multiplicity="*" />
@@ -916,16 +892,11 @@
           <End Role="course_schedule" Type="Self.course_schedule" Multiplicity="*" />
           <End Role="TeachingAssistant" Type="Self.TeachingAssistant" Multiplicity="*" />
         </Association>
-        <Association Name="prerequisite">
-          <End Role="course" Type="Self.course" Multiplicity="*" />
-          <End Role="course1" Type="Self.course" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="cse136Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="admins" EntityType="Self.admin" />
           <EntitySet Name="buildings" EntityType="Self.building" />
           <EntitySet Name="class_review" EntityType="Self.class_review" />
           <EntitySet Name="classrooms" EntityType="Self.classroom" />
-          <EntitySet Name="courses" EntityType="Self.course" />
           <EntitySet Name="course_schedule" EntityType="Self.course_schedule" />
           <EntitySet Name="enrollments" EntityType="Self.enrollment" />
           <EntitySet Name="instructors" EntityType="Self.instructor" />
@@ -951,10 +922,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_course_schedule_classroom" Association="Self.FK_course_schedule_classroom">
             <End Role="classroom" EntitySet="classrooms" />
-            <End Role="course_schedule" EntitySet="course_schedule" />
-          </AssociationSet>
-          <AssociationSet Name="FK_course_schedule_course" Association="Self.FK_course_schedule_course">
-            <End Role="course" EntitySet="courses" />
             <End Role="course_schedule" EntitySet="course_schedule" />
           </AssociationSet>
           <AssociationSet Name="FK_course_schedule_instructor" Association="Self.FK_course_schedule_instructor">
@@ -992,10 +959,6 @@
           <AssociationSet Name="course_schedule_ta" Association="Self.course_schedule_ta">
             <End Role="course_schedule" EntitySet="course_schedule" />
             <End Role="TeachingAssistant" EntitySet="TeachingAssistants" />
-          </AssociationSet>
-          <AssociationSet Name="prerequisite" Association="Self.prerequisite">
-            <End Role="course" EntitySet="courses" />
-            <End Role="course1" EntitySet="courses" />
           </AssociationSet>
           <FunctionImport Name="dba_insert_initial_data" />
           <FunctionImport Name="ic_136_test_get_ta_info" ReturnType="Collection(cse136Model.ic_136_test_get_ta_info_Result)">
@@ -1083,6 +1046,15 @@
             <End Role="schedule_time" EntitySet="schedule_time" />
             <End Role="schedule_tutor" EntitySet="schedule_tutor" />
           </AssociationSet>
+          <EntitySet Name="courses" EntityType="cse136Model.course" />
+          <AssociationSet Name="FK_course_schedule_course" Association="cse136Model.FK_course_schedule_course">
+            <End Role="course" EntitySet="courses" />
+            <End Role="course_schedule" EntitySet="course_schedule" />
+          </AssociationSet>
+          <AssociationSet Name="prerequisite" Association="cse136Model.prerequisite">
+            <End Role="course" EntitySet="courses" />
+            <End Role="course1" EntitySet="courses" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="ic_136_test_get_ta_info_Result">
           <Property Type="Int32" Name="ta_id" Nullable="false" />
@@ -1164,6 +1136,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="course">
+          <Key>
+            <PropertyRef Name="course_id" />
+          </Key>
+          <Property Name="course_id" Type="Int32" Nullable="false" />
+          <Property Name="course_title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="course_level" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="course_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="course_schedule" Relationship="cse136Model.FK_course_schedule_course" FromRole="course" ToRole="course_schedule" />
+          <NavigationProperty Name="course1" Relationship="cse136Model.prerequisite" FromRole="course" ToRole="course1" />
+          <NavigationProperty Name="courses" Relationship="cse136Model.prerequisite" FromRole="course1" ToRole="course" />
+        </EntityType>
+        <Association Name="FK_course_schedule_course">
+          <End Type="cse136Model.course" Role="course" Multiplicity="1" />
+          <End Type="cse136Model.course_schedule" Role="course_schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="course_id" />
+            </Principal>
+            <Dependent Role="course_schedule">
+              <PropertyRef Name="course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="prerequisite">
+          <End Type="cse136Model.course" Role="course" Multiplicity="*" />
+          <End Type="cse136Model.course" Role="course1" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1205,16 +1205,6 @@
                 <ScalarProperty Name="classroom_name" ColumnName="classroom_name" />
                 <ScalarProperty Name="building_id" ColumnName="building_id" />
                 <ScalarProperty Name="max_students" ColumnName="max_students" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="courses">
-            <EntityTypeMapping TypeName="cse136Model.course">
-              <MappingFragment StoreEntitySet="course">
-                <ScalarProperty Name="course_id" ColumnName="course_id" />
-                <ScalarProperty Name="course_title" ColumnName="course_title" />
-                <ScalarProperty Name="course_level" ColumnName="course_level" />
-                <ScalarProperty Name="course_description" ColumnName="course_description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1338,14 +1328,6 @@
               <ScalarProperty Name="ta_id" ColumnName="ta_id" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="prerequisite" TypeName="cse136Model.prerequisite" StoreEntitySet="prerequisite">
-            <EndProperty Name="course">
-              <ScalarProperty Name="course_id" ColumnName="course_id" />
-            </EndProperty>
-            <EndProperty Name="course1">
-              <ScalarProperty Name="course_id" ColumnName="requirement_Id" />
-            </EndProperty>
-          </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="dba_insert_initial_data" FunctionName="cse136Model.Store.dba_insert_initial_data" />
           <FunctionImportMapping FunctionImportName="ic_136_test_get_ta_info" FunctionName="cse136Model.Store.ic_136_test_get_ta_info">
             <ResultMapping>
@@ -1445,6 +1427,24 @@
           <FunctionImportMapping FunctionImportName="spInsertStudentInfo" FunctionName="cse136Model.Store.spInsertStudentInfo" />
           <FunctionImportMapping FunctionImportName="spInsertStudentSchedule" FunctionName="cse136Model.Store.spInsertStudentSchedule" />
           <FunctionImportMapping FunctionImportName="spUpdateStudentInfo" FunctionName="cse136Model.Store.spUpdateStudentInfo" />
+          <EntitySetMapping Name="courses">
+            <EntityTypeMapping TypeName="cse136Model.course">
+              <MappingFragment StoreEntitySet="course">
+                <ScalarProperty Name="course_description" ColumnName="course_description" />
+                <ScalarProperty Name="course_level" ColumnName="course_level" />
+                <ScalarProperty Name="course_title" ColumnName="course_title" />
+                <ScalarProperty Name="course_id" ColumnName="course_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="prerequisite" TypeName="cse136Model.prerequisite" StoreEntitySet="prerequisite">
+            <EndProperty Name="course1">
+              <ScalarProperty Name="course_id" ColumnName="requirement_Id" />
+            </EndProperty>
+            <EndProperty Name="course">
+              <ScalarProperty Name="course_id" ColumnName="course_id" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

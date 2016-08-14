@@ -102,6 +102,7 @@
     <Compile Include="instructor.cs">
       <DependentUpon>CSE136Entities.tt</DependentUpon>
     </Compile>
+    <Compile Include="ReviewRepository.cs" />
     <Compile Include="ScheduleRepository.cs" />
     <Compile Include="schedule_day.cs">
       <DependentUpon>CSE136Entities.tt</DependentUpon>

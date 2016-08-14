@@ -77,26 +77,5 @@
                 context.Dispose();
             }
         }
-
-        public ICollection<schedule_tutor> GetClassTutors(int schedule_id, ref List<string> errors)
-        {
-            var list = new List<schedule_tutor>();
-            var context = new cse136Entities();
-            
-            try
-            {
-                list = context.schedule_tutor.Where(st => st.schedule_id == schedule_id).ToList();
-            }
-            catch (Exception e)
-            {
-                errors.Add("Error: " + e);
-            }
-            finally
-            {
-                context.Dispose();
-            }
-
-            return list;
-        }
     }
 }

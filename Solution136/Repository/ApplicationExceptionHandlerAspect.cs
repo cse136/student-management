@@ -1,22 +1,21 @@
-﻿using System;
-
-using PostSharp.Aspects;
-
-namespace Repository
+﻿namespace Repository
 {
+    using System;
     using System.Diagnostics;
     using System.Reflection;
 
+    using PostSharp.Aspects;
+    
     [Serializable]
-    class ApplicationExceptionHandlerAspect : OnExceptionAspect
+    public class ApplicationExceptionHandlerAspect : OnExceptionAspect
     {
         public override void OnException(MethodExecutionArgs args)
         {
             // now, you can log the error 
-            LogInfoNow("OnException");
-            LogInfoNow(args.Exception.ToString());
-            LogInfoNow(args.Method.DeclaringType.Name);
-            LogInfoNow(args.Method.Name);
+            this.LogInfoNow("OnException");
+            this.LogInfoNow(args.Exception.ToString());
+            this.LogInfoNow(args.Method.DeclaringType.Name);
+            this.LogInfoNow(args.Method.Name);
         }
 
         public override Type GetExceptionType(MethodBase targetMethod)

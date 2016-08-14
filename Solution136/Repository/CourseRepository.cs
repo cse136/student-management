@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
+    using System.Linq;
 
     using IRepository;
 
@@ -62,6 +63,76 @@
             }
 
             return courseList;
+        }
+
+        public void InsertCourse(course course, ref List<string> errors)
+        {
+            var context = new cse136Entities();
+            try
+            {
+                context.courses.Add(course);
+                context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+            finally
+            {
+                context.Dispose();
+            }
+        }
+
+        public void UpdateCourse(course course, ref List<string> errors)
+        {
+            var context = new cse136Entities();
+            try
+            {
+                var result_course = context.courses.SingleOrDefault(c =>
+                    c.course_id == course.course_id);
+
+                if (result_course != null)
+                {
+                    result_course.course_description = course.course_description;
+                    result_course.course_level = course.course_level;
+                    result_course.course_title = course.course_title;
+                
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+            finally
+            {
+                context.Dispose();
+            }
+        }
+
+        public void DeleteCourse(int course_id, ref List<string> errors)
+        {
+            var context = new cse136Entities();
+
+            try
+            {
+                var course = new course()
+                {
+                    course_id = course_id
+                };
+
+                context.courses.Attach(course);
+                context.courses.Remove(course);
+                context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+            finally
+            {
+                context.Dispose();
+            }
         }
     }
 }

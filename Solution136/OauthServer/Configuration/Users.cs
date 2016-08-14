@@ -18,7 +18,7 @@
                     Subject = "ichu@eng.ucsd.edu",
                     Username = "ichu@eng.ucsd.edu",
                     Password = "password",
-                    Claims = new []
+                    Claims = new[]
                     {
                         new Claim(Constants.ClaimTypes.Name, "Isaac Chu")
                     }

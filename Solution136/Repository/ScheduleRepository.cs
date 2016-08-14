@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
-
+    using System.Linq;
     using IRepository;
 
     using POCO;
@@ -72,6 +72,100 @@
             }
 
             return scheduleList;
+        }
+
+        public ICollection<schedule_tutor> GetCourseTutors(int schedule_id, ref List<string> errors)
+        {
+            var list = new List<schedule_tutor>();
+            var context = new cse136Entities();
+
+            try
+            {
+                list = context.schedule_tutor.Where(st => st.schedule_id == schedule_id).ToList();
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+            finally
+            {
+                context.Dispose();
+            }
+
+            return list;
+        }
+
+        public void EnrollStudentToCourse(int schedule_id, string student_id, ref List<string> errors)
+        {
+            var context = new cse136Entities();
+            try
+            {
+                var student_enrollment = new enrollment()
+                {
+                    schedule_id = schedule_id,
+                    student_id = student_id
+                };
+
+                context.enrollments.Add(student_enrollment);
+                context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+            finally
+            {
+                context.Dispose();
+            }
+        }
+
+        public void DropStudentFromCourse(int schedule_id, string student_id, ref List<string> errors)
+        {
+            var context = new cse136Entities();
+
+            try
+            {
+                var student_enrollment = new enrollment()
+                {
+                    schedule_id = schedule_id,
+                    student_id = student_id
+                };
+
+                context.enrollments.Attach(student_enrollment);
+                context.enrollments.Remove(student_enrollment);
+                context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+            finally
+            {
+                context.Dispose();
+            }
+        }
+
+        public ICollection<course_schedule> GetCurrentStudentEnrollments(string student_id, ref List<string> errors)
+        {
+            var list = new List<course_schedule>();
+            var context = new cse136Entities();
+
+            try
+            {
+                list = context.enrollments.Include("course_schedule")
+                    .Where(e => e.student_id == student_id && e.grade == null)
+                    .Select(e => e.course_schedule).ToList();
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+            finally
+            {
+                context.Dispose();
+            }
+
+            return list;
         }
     }
 }

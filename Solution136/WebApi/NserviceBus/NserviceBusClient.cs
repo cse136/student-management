@@ -3,9 +3,7 @@
     using NServiceBus;
 
     public class NserviceBusClient
-    {
-        public static ISendOnlyBus Bus { get; set; }
-
+    { 
         static NserviceBusClient()
         {
             var busConfiguration = new BusConfiguration();
@@ -15,9 +13,11 @@
             busConfiguration.EndpointName("NserviceBusDemo.Backend");
 
             // If you use the following endpoint, you will see the messages queued up in Outgoing Queues instead.
-            // busConfiguration.EndpointName("NserviceBusDemo.Backend@NoWhere");
+            //// busConfiguration.EndpointName("NserviceBusDemo.Backend@NoWhere");
 
             Bus = NServiceBus.Bus.CreateSendOnly(busConfiguration);
         }
+
+        public static ISendOnlyBus Bus { get; set; }
     }
 }

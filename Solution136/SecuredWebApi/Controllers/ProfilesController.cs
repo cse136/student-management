@@ -10,18 +10,19 @@
         [Authorize]
         public IHttpActionResult Get()
         {
-            var email = ((ClaimsPrincipal) User)
-                .Claims
+            var user = (ClaimsPrincipal)User;
+
+            var email = user.Claims
                 .FirstOrDefault(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")
-                ?.Value;
+                .Value;
 
             if (email == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
             var returnData = "I can hit the secured web api";
-            return Ok(returnData);
+            return this.Ok(returnData);
         }
     }
 }

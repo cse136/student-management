@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Repository
+﻿namespace Repository
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
     public class TutorRepository
     {
         public void InsertTutor(schedule_tutor student, ref List<string> errors)
@@ -78,11 +78,11 @@ namespace Repository
             }
         }
 
-        public ICollection<schedule_tutor> GetStudentDetail(int schedule_id, ref List<string> errors)
+        public ICollection<schedule_tutor> GetClassTutors(int schedule_id, ref List<string> errors)
         {
             var list = new List<schedule_tutor>();
             var context = new cse136Entities();
-
+            
             try
             {
                 list = context.schedule_tutor.Where(st => st.schedule_id == schedule_id).ToList();

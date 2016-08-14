@@ -78,6 +78,7 @@
                 logon.Role = dataSet.Tables[0].Rows[0]["role"].ToString();
                 logon.Id = dataSet.Tables[0].Rows[0]["id"].ToString();
             }
+
             conn.Dispose();
 
             return logon;

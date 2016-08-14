@@ -3,10 +3,11 @@ using System.Configuration;
 using System.Security.Cryptography.X509Certificates;
 using IdentityServer3.Core.Configuration;
 using Microsoft.Owin;
-using Owin;
 using OauthServer.Configuration;
+using Owin;
 
 [assembly: OwinStartup(typeof(OauthServer.Startup))]
+
 namespace OauthServer
 {
     public class Startup
@@ -20,9 +21,10 @@ namespace OauthServer
             
             var options = new IdentityServerOptions
             {
-                SigningCertificate = new X509Certificate2(Convert.FromBase64String(
-                    ConfigurationManager.AppSettings["SigningCertificate"]), 
-                    ConfigurationManager.AppSettings["SigningCertificatePassword"]),
+                SigningCertificate = new X509Certificate2(
+                    Convert.FromBase64String(
+                        ConfigurationManager.AppSettings["SigningCertificate"]), 
+                        ConfigurationManager.AppSettings["SigningCertificatePassword"]),
                 Factory = factory,
                 RequireSsl = false,
                 AuthenticationOptions = new AuthenticationOptions

@@ -8,27 +8,27 @@
     /// This class require you to install PostSharp (free express version would be good enough for CSe136)
     /// </summary>
     [Serializable]
-    class ConsoleWriteLineAspect : OnMethodBoundaryAspect
+    public class ConsoleWriteLineAspect : OnMethodBoundaryAspect
     {
         public override void OnEntry(MethodExecutionArgs args)
         {
-            LogInfoNow("OnEntry");
-            LogInfoNow(args.Method.DeclaringType.Name);
-            LogInfoNow(args.Method.Name);
+            this.LogInfoNow("OnEntry");
+            this.LogInfoNow(args.Method.DeclaringType.Name);
+            this.LogInfoNow(args.Method.Name);
         }
 
         public override void OnSuccess(MethodExecutionArgs args)
         {
-            LogInfoNow("OnSuccess");
-            LogInfoNow(args.Method.DeclaringType.Name);
-            LogInfoNow(args.Method.Name);
-            LogInfoNow(args.ReturnValue.ToString());
+            this.LogInfoNow("OnSuccess");
+            this.LogInfoNow(args.Method.DeclaringType.Name);
+            this.LogInfoNow(args.Method.Name);
+            this.LogInfoNow(args.ReturnValue.ToString());
         }
 
         public override void OnExit(MethodExecutionArgs args)
         {
-            LogInfoNow(args.Method.DeclaringType.Name);
-            LogInfoNow(args.Method.Name);
+            this.LogInfoNow(args.Method.DeclaringType.Name);
+            this.LogInfoNow(args.Method.Name);
         }
 
         private void LogInfoNow(string info)

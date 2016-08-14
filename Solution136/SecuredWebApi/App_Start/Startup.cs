@@ -1,13 +1,14 @@
-﻿using System.Reflection;
+﻿using System.Configuration;
+using System.Reflection;
 using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
 using IdentityServer3.AccessTokenValidation;
 using Microsoft.Owin;
 using Owin;
-using System.Configuration;
 
 [assembly: OwinStartup(typeof(SecuredWebApi.Startup))]
+
 namespace SecuredWebApi
 {
     public class Startup
@@ -29,7 +30,6 @@ namespace SecuredWebApi
             });
 
             app.UseWebApi(config);
-
         }
     }
 }

@@ -134,5 +134,84 @@
                 context.Dispose();
             }
         }
+
+        public void InsertCoursePrereq(int course_id, int prereq_course_id, ref List<string> errors)
+        {
+            var context = new cse136Entities();
+            try
+            {
+                var result_course = context.courses.SingleOrDefault(c =>
+                    c.course_id == course_id);
+
+                var prereq = new course { course_id = prereq_course_id };
+
+                if (result_course != null)
+                {
+                    result_course.courses.Add(prereq);
+                }
+
+                context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+            finally
+            {
+                context.Dispose();
+            }
+        }
+
+        public void DeleteCoursePrereq(int course_id, int prereq_course_id, ref List<string> errors)
+        {
+            var context = new cse136Entities();
+
+            try
+            {
+                var result_course = context.courses.SingleOrDefault(c =>
+                    c.course_id == course_id);
+
+                var prereq = new course { course_id = prereq_course_id };
+
+                if (result_course != null)
+                {
+                    result_course.courses.Remove(prereq);
+                }
+
+                context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+            finally
+            {
+                context.Dispose();
+            }
+        }
+
+        public ICollection<course> GetCoursePrereqs(int course_id, ref List<string> errors)
+        {
+            var list = new List<course>();
+            var context = new cse136Entities();
+
+            try
+            {
+                var result_course = context.courses.SingleOrDefault(c =>
+                                    c.course_id == course_id);
+
+                list = result_course.courses.ToList();
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+            finally
+            {
+                context.Dispose();
+            }
+
+            return list;
+        }
     }
 }

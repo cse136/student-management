@@ -31,7 +31,6 @@ namespace Repository
         public virtual DbSet<building> buildings { get; set; }
         public virtual DbSet<class_review> class_review { get; set; }
         public virtual DbSet<classroom> classrooms { get; set; }
-        public virtual DbSet<course> courses { get; set; }
         public virtual DbSet<course_schedule> course_schedule { get; set; }
         public virtual DbSet<enrollment> enrollments { get; set; }
         public virtual DbSet<instructor> instructors { get; set; }
@@ -43,6 +42,7 @@ namespace Repository
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TeachingAssistant> TeachingAssistants { get; set; }
         public virtual DbSet<TeachingAssistantType> TeachingAssistantTypes { get; set; }
+        public virtual DbSet<course> courses { get; set; }
     
         public virtual int dba_insert_initial_data()
         {

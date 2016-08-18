@@ -13,6 +13,11 @@
             var context = new cse136Entities();
             try
             {
+                if (string.IsNullOrEmpty(ta.first) || string.IsNullOrEmpty(ta.last))
+                {
+                    throw new Exception("TA's first name and/or last name are null");
+                }
+
                 context.TeachingAssistants.Add(ta);
                 context.SaveChanges();
             }
@@ -32,16 +37,18 @@
             try
             {
                 var result_ta = context.TeachingAssistants.SingleOrDefault(t =>
-                    t.ta_id == TeachingAssistant.ta_id );
+                    t.ta_id == ta.ta_id);
 
-                if (result_ta != null)
+                if (result_ta == null)
                 {
-                    result_ta.ta_type_id = ta.ta_type_id;
-                    result_ta.first = ta.first;
-                    result_ta.last = ta.last;
-                    
-                    context.SaveChanges();
+                    throw new Exception("TA for ID provided doesn't exist");
                 }
+
+                result_ta.ta_type_id = ta.ta_type_id;
+                result_ta.first = ta.first;
+                result_ta.last = ta.last;
+
+                context.SaveChanges();
             }
             catch (Exception e)
             {
@@ -65,7 +72,7 @@
                 };
 
                 context.TeachingAssistants.Attach(ta);
-                context.schedule_tutor.Remove(ta);
+                context.TeachingAssistants.Remove(ta);
                 context.SaveChanges();
             }
             catch (Exception e)
@@ -85,7 +92,15 @@
             
             try
             {
-                list = context.TeachingAssistants.Include("course_schedule").Where(t => t.course_schedule.schedule_id == schedule_id).ToList();
+                var course = context.course_schedule.Include("TeachingAssistants")
+                    .Where(cs => cs.schedule_id == schedule_id).FirstOrDefault();
+
+                if (course == null)
+                {
+                    throw new Exception("Course for ID provided doesn't exist");
+                }
+                
+                list = course.TeachingAssistants.ToList();
             }
             catch (Exception e)
             {
@@ -100,3 +115,4 @@
         }
     }
 }
+ 

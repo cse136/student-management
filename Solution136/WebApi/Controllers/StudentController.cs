@@ -18,7 +18,7 @@
         }
 
         [HttpGet]
-        public Student GetStudent(string id)
+        public student GetStudent(string id)
         {
             var errors = new List<string>();
             var repository = new StudentRepository();
@@ -27,7 +27,7 @@
         }
 
         [HttpPost]
-        public string InsertStudent(Student student)
+        public string InsertStudent(student student)
         {
             var errors = new List<string>();
             var repository = new StudentRepository();
@@ -42,7 +42,7 @@
         }
 
         [HttpPost]
-        public string UpdateStudent(Student student)
+        public string UpdateStudent(student student)
         {
             var errors = new List<string>();
             var repository = new StudentRepository();

@@ -22,7 +22,7 @@
                 throw new ArgumentException();
             }
 
-            if (student.StudentId.Length < 5)
+            if (student.student_id.Length < 5)
             {
                 errors.Add("Invalid student ID");
                 throw new ArgumentException();
@@ -39,13 +39,13 @@
                 throw new ArgumentException();
             }
 
-            if (string.IsNullOrEmpty(student.StudentId))
+            if (string.IsNullOrEmpty(student.student_id))
             {
                 errors.Add("Invalid student id");
                 throw new ArgumentException();
             }
 
-            if (student.StudentId.Length < 5)
+            if (student.student_id.Length < 5)
             {
                 errors.Add("Invalid student id");
                 throw new ArgumentException();
@@ -139,7 +139,7 @@
 
             foreach (var enrollment in enrollments)
             {
-                sum += enrollment.GradeValue;
+                sum += enrollment.gradeValue;
             }
 
             return sum / enrollments.Count;

@@ -9,7 +9,7 @@
     public class CourseController : ApiController
     {
         [HttpGet]
-        public List<Course> GetCourseList()
+        public List<course> GetCourseList()
         {
             var service = new CourseService(new CourseRepository());
             var errors = new List<string>();

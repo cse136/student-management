@@ -10,7 +10,7 @@
         {
             //// 136 TODO: get the admin info 
             //// for now, returning the hard-coded value
-            return new admin() { FirstName = "Isaac", LastName = "Chu", Id = adminId };
+            return new admin() {  first_name = "Isaac", last_name = "Chu", admin_id = adminId };
         }
 
         [HttpPost]

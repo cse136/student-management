@@ -173,21 +173,23 @@
                     student.enrollments = new List<enrollment>();
                     for (var i = 0; i < dataSet.Tables[1].Rows.Count; i++)
                     {
-                        var schedule = new Schedule();
+                        var enrollment = new enrollment();
+                        var schedule = new course_schedule();
                         var course = new course
                                          {
-                                             course_id = dataSet.Tables[1].Rows[i]["course_id"].ToString(),
+                                             course_id = (int) dataSet.Tables[1].Rows[i]["course_id"],
                                              course_title = dataSet.Tables[1].Rows[i]["course_title"].ToString(),
                                              course_description =
                                                  dataSet.Tables[1].Rows[i]["course_description"].ToString()
                                          };
-                        schedule.Course = course;
+                        schedule.course = course;
 
-                        schedule.Quarter = dataSet.Tables[1].Rows[i]["quarter"].ToString();
-                        schedule.Year = dataSet.Tables[1].Rows[i]["year"].ToString();
-                        schedule.Session = dataSet.Tables[1].Rows[i]["session"].ToString();
-                        schedule.ScheduleId = Convert.ToInt32(dataSet.Tables[1].Rows[i]["schedule_id"].ToString());
-                        student.enrollments.Add(schedule);
+                        schedule.quarter = dataSet.Tables[1].Rows[i]["quarter"].ToString();
+                        schedule.year = (int)dataSet.Tables[1].Rows[i]["year"];
+                        schedule.session = dataSet.Tables[1].Rows[i]["session"].ToString();
+                        schedule.schedule_id = Convert.ToInt32(dataSet.Tables[1].Rows[i]["schedule_id"].ToString());
+                        enrollment.course_schedule = schedule;
+                        student.enrollments.Add(enrollment);
                     }
                 }
             }
@@ -206,7 +208,7 @@
         public List<student> GetStudentList(ref List<string> errors)
         {
             var conn = new SqlConnection(ConnectionString);
-            var studentList = new List<Student>();
+            var studentList = new List<student>();
 
             try
             {
@@ -233,13 +235,13 @@
                                           student_id = dataSet.Tables[0].Rows[i]["student_id"].ToString(),
                                           first_name = dataSet.Tables[0].Rows[i]["first_name"].ToString(),
                                           last_name = dataSet.Tables[0].Rows[i]["last_name"].ToString(),
-                                          SSN = dataSet.Tables[0].Rows[i]["ssn"].ToString(),
-                                          Email = dataSet.Tables[0].Rows[i]["email"].ToString(),
-                                          Password = dataSet.Tables[0].Rows[i]["password"].ToString(),
-                                          ShoeSize =
+                                          ssn = dataSet.Tables[0].Rows[i]["ssn"].ToString(),
+                                          email = dataSet.Tables[0].Rows[i]["email"].ToString(),
+                                          password = dataSet.Tables[0].Rows[i]["password"].ToString(),
+                                          shoe_size =
                                               (float)
                                               Convert.ToDouble(dataSet.Tables[0].Rows[i]["shoe_size"].ToString()),
-                                          Weight = Convert.ToInt32(dataSet.Tables[0].Rows[i]["weight"].ToString())
+                                          weight = Convert.ToInt32(dataSet.Tables[0].Rows[i]["weight"].ToString())
                                       };
                     studentList.Add(student);
                 }

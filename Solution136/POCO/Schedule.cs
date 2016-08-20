@@ -10,7 +10,7 @@
 
         public string Session { get; set; }
 
-        public Course Course { get; set; }
+        public course Course { get; set; }
 
         public override string ToString()
         {

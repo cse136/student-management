@@ -9,7 +9,7 @@
     public class StudentController : ApiController
     {
         [HttpGet]
-        public List<Student> GetStudentList()
+        public List<student> GetStudentList()
         {
             var errors = new List<string>();
             var repository = new StudentRepository();

@@ -7,25 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Repository
+namespace POCO
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class instructor
+    public partial class TeachingAssistantType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public instructor()
+        public TeachingAssistantType()
         {
-            this.course_schedule = new HashSet<course_schedule>();
+            this.TeachingAssistants = new HashSet<TeachingAssistant>();
         }
     
-        public int instructor_id { get; set; }
-        public string first_name { get; set; }
-        public string last_name { get; set; }
-        public string title { get; set; }
+        public int ta_type_id { get; set; }
+        public string ta_type_desc { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<course_schedule> course_schedule { get; set; }
+        public virtual ICollection<TeachingAssistant> TeachingAssistants { get; set; }
     }
 }

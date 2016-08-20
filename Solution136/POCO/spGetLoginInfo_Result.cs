@@ -7,15 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Repository
+namespace POCO
 {
     using System;
     
-    public partial class ic_136_test_get_ta_info_Result
+    public partial class spGetLoginInfo_Result
     {
-        public int ta_id { get; set; }
-        public int ta_type_id { get; set; }
-        public string first { get; set; }
-        public string last { get; set; }
+        public string role { get; set; }
+        public string id { get; set; }
     }
 }

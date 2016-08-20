@@ -17,7 +17,7 @@
         private const string InsertStudentScheduleProcedure = "spInsertStudentSchedule";
         private const string DeleteStudentScheduleProcedure = "spDeleteStudentSchedule";
 
-        public void InsertStudent(Student student, ref List<string> errors)
+        public void InsertStudent(student student, ref List<string> errors)
         {
             var conn = new SqlConnection(ConnectionString);
             try
@@ -38,14 +38,14 @@
                 adapter.SelectCommand.Parameters.Add(new SqlParameter("@shoe_size", SqlDbType.Float));
                 adapter.SelectCommand.Parameters.Add(new SqlParameter("@weight", SqlDbType.Int));
 
-                adapter.SelectCommand.Parameters["@student_id"].Value = student.StudentId;
-                adapter.SelectCommand.Parameters["@ssn"].Value = student.SSN;
-                adapter.SelectCommand.Parameters["@first_name"].Value = student.FirstName;
-                adapter.SelectCommand.Parameters["@last_name"].Value = student.LastName;
-                adapter.SelectCommand.Parameters["@email"].Value = student.Email;
-                adapter.SelectCommand.Parameters["@password"].Value = student.Password;
-                adapter.SelectCommand.Parameters["@shoe_size"].Value = student.ShoeSize;
-                adapter.SelectCommand.Parameters["@weight"].Value = student.Weight;
+                adapter.SelectCommand.Parameters["@student_id"].Value = student.student_id;
+                adapter.SelectCommand.Parameters["@ssn"].Value = student.ssn;
+                adapter.SelectCommand.Parameters["@first_name"].Value = student.first_name;
+                adapter.SelectCommand.Parameters["@last_name"].Value = student.last_name;
+                adapter.SelectCommand.Parameters["@email"].Value = student.email;
+                adapter.SelectCommand.Parameters["@password"].Value = student.password;
+                adapter.SelectCommand.Parameters["@shoe_size"].Value = student.shoe_size;
+                adapter.SelectCommand.Parameters["@weight"].Value = student.weight;
 
                 var dataSet = new DataSet();
                 adapter.Fill(dataSet);
@@ -60,7 +60,7 @@
             }
         }
 
-        public void UpdateStudent(Student student, ref List<string> errors)
+        public void UpdateStudent(student student, ref List<string> errors)
         {
             var conn = new SqlConnection(ConnectionString);
             try
@@ -78,14 +78,14 @@
                 adapter.SelectCommand.Parameters.Add(new SqlParameter("@shoe_size", SqlDbType.Float));
                 adapter.SelectCommand.Parameters.Add(new SqlParameter("@weight", SqlDbType.Int));
 
-                adapter.SelectCommand.Parameters["@student_id"].Value = student.StudentId;
-                adapter.SelectCommand.Parameters["@ssn"].Value = student.SSN;
-                adapter.SelectCommand.Parameters["@first_name"].Value = student.FirstName;
-                adapter.SelectCommand.Parameters["@last_name"].Value = student.LastName;
-                adapter.SelectCommand.Parameters["@email"].Value = student.Email;
-                adapter.SelectCommand.Parameters["@password"].Value = student.Password;
-                adapter.SelectCommand.Parameters["@shoe_size"].Value = student.ShoeSize;
-                adapter.SelectCommand.Parameters["@weight"].Value = student.Weight;
+                adapter.SelectCommand.Parameters["@student_id"].Value = student.student_id;
+                adapter.SelectCommand.Parameters["@ssn"].Value = student.ssn;
+                adapter.SelectCommand.Parameters["@first_name"].Value = student.first_name;
+                adapter.SelectCommand.Parameters["@last_name"].Value = student.last_name;
+                adapter.SelectCommand.Parameters["@email"].Value = student.email;
+                adapter.SelectCommand.Parameters["@password"].Value = student.password;
+                adapter.SelectCommand.Parameters["@shoe_size"].Value = student.shoe_size;
+                adapter.SelectCommand.Parameters["@weight"].Value = student.weight;
 
                 var dataSet = new DataSet();
                 adapter.Fill(dataSet);
@@ -132,10 +132,10 @@
             }
         }
 
-        public Student GetStudentDetail(string id, ref List<string> errors)
+        public student GetStudentDetail(string id, ref List<string> errors)
         {
             var conn = new SqlConnection(ConnectionString);
-            Student student = null;
+            student student = null;
 
             try
             {
@@ -155,30 +155,30 @@
                     return null;
                 }
 
-                student = new Student
+                student = new student
                               {
-                                  StudentId = dataSet.Tables[0].Rows[0]["student_id"].ToString(),
-                                  FirstName = dataSet.Tables[0].Rows[0]["first_name"].ToString(),
-                                  LastName = dataSet.Tables[0].Rows[0]["last_name"].ToString(),
-                                  SSN = dataSet.Tables[0].Rows[0]["ssn"].ToString(),
-                                  Email = dataSet.Tables[0].Rows[0]["email"].ToString(),
-                                  Password = dataSet.Tables[0].Rows[0]["password"].ToString(),
-                                  ShoeSize =
+                                  student_id = dataSet.Tables[0].Rows[0]["student_id"].ToString(),
+                                  first_name = dataSet.Tables[0].Rows[0]["first_name"].ToString(),
+                                  last_name = dataSet.Tables[0].Rows[0]["last_name"].ToString(),
+                                  ssn = dataSet.Tables[0].Rows[0]["ssn"].ToString(),
+                                  email = dataSet.Tables[0].Rows[0]["email"].ToString(),
+                                  password = dataSet.Tables[0].Rows[0]["password"].ToString(),
+                                  shoe_size =
                                       (float)Convert.ToDouble(dataSet.Tables[0].Rows[0]["shoe_size"].ToString()),
-                                  Weight = Convert.ToInt32(dataSet.Tables[0].Rows[0]["weight"].ToString())
+                                  weight = Convert.ToInt32(dataSet.Tables[0].Rows[0]["weight"].ToString())
                               };
 
                 if (dataSet.Tables[1] != null)
                 {
-                    student.Enrolled = new List<Schedule>();
+                    student.enrollments = new List<enrollment>();
                     for (var i = 0; i < dataSet.Tables[1].Rows.Count; i++)
                     {
                         var schedule = new Schedule();
-                        var course = new Course
+                        var course = new course
                                          {
-                                             CourseId = dataSet.Tables[1].Rows[i]["course_id"].ToString(),
-                                             Title = dataSet.Tables[1].Rows[i]["course_title"].ToString(),
-                                             Description =
+                                             course_id = dataSet.Tables[1].Rows[i]["course_id"].ToString(),
+                                             course_title = dataSet.Tables[1].Rows[i]["course_title"].ToString(),
+                                             course_description =
                                                  dataSet.Tables[1].Rows[i]["course_description"].ToString()
                                          };
                         schedule.Course = course;
@@ -187,7 +187,7 @@
                         schedule.Year = dataSet.Tables[1].Rows[i]["year"].ToString();
                         schedule.Session = dataSet.Tables[1].Rows[i]["session"].ToString();
                         schedule.ScheduleId = Convert.ToInt32(dataSet.Tables[1].Rows[i]["schedule_id"].ToString());
-                        student.Enrolled.Add(schedule);
+                        student.enrollments.Add(schedule);
                     }
                 }
             }
@@ -203,7 +203,7 @@
             return student;
         }
 
-        public List<Student> GetStudentList(ref List<string> errors)
+        public List<student> GetStudentList(ref List<string> errors)
         {
             var conn = new SqlConnection(ConnectionString);
             var studentList = new List<Student>();
@@ -228,11 +228,11 @@
 
                 for (var i = 0; i < dataSet.Tables[0].Rows.Count; i++)
                 {
-                    var student = new Student
+                    var student = new student
                                       {
-                                          StudentId = dataSet.Tables[0].Rows[i]["student_id"].ToString(),
-                                          FirstName = dataSet.Tables[0].Rows[i]["first_name"].ToString(),
-                                          LastName = dataSet.Tables[0].Rows[i]["last_name"].ToString(),
+                                          student_id = dataSet.Tables[0].Rows[i]["student_id"].ToString(),
+                                          first_name = dataSet.Tables[0].Rows[i]["first_name"].ToString(),
+                                          last_name = dataSet.Tables[0].Rows[i]["last_name"].ToString(),
                                           SSN = dataSet.Tables[0].Rows[i]["ssn"].ToString(),
                                           Email = dataSet.Tables[0].Rows[i]["email"].ToString(),
                                           Password = dataSet.Tables[0].Rows[i]["password"].ToString(),
@@ -326,7 +326,7 @@
             }
         }
 
-        public List<Enrollment> GetEnrollments(string studentId)
+        public List<enrollment> GetEnrollments(string studentId)
         {
             //// Not implemented yet. 136 TODO:
             throw new Exception();

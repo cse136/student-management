@@ -56,101 +56,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="admin.cs">
-      <DependentUpon>CSE136Entities.tt</DependentUpon>
-    </Compile>
     <Compile Include="AuthorizeRepository.cs" />
     <Compile Include="BaseRepository.cs" />
     <Compile Include="ApplicationExceptionHandlerAspect.cs" />
-    <Compile Include="building.cs">
-      <DependentUpon>CSE136Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="classroom.cs">
-      <DependentUpon>CSE136Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="class_review.cs">
-      <DependentUpon>CSE136Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="course.cs">
-      <DependentUpon>CSE136Entities.tt</DependentUpon>
-    </Compile>
     <Compile Include="CourseRepository.cs" />
-    <Compile Include="course_schedule.cs">
-      <DependentUpon>CSE136Entities.tt</DependentUpon>
-    </Compile>
     <Compile Include="CSE136Entities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CSE136Entities.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CSE136Entities.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CSE136Entities.tt</DependentUpon>
     </Compile>
     <Compile Include="CSE136Entities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CSE136Entities.edmx</DependentUpon>
     </Compile>
-    <Compile Include="enrollment.cs">
-      <DependentUpon>CSE136Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ic_136_test_get_ta_info_Result.cs">
-      <DependentUpon>CSE136Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="instructor.cs">
-      <DependentUpon>CSE136Entities.tt</DependentUpon>
-    </Compile>
     <Compile Include="ReviewRepository.cs" />
     <Compile Include="ScheduleRepository.cs" />
-    <Compile Include="schedule_day.cs">
-      <DependentUpon>CSE136Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="schedule_time.cs">
-      <DependentUpon>CSE136Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="schedule_tutor.cs">
-      <DependentUpon>CSE136Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="spGetCourseList_Result.cs">
-      <DependentUpon>CSE136Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="spGetLoginInfo_Result.cs">
-      <DependentUpon>CSE136Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="spGetScheduleList_Result.cs">
-      <DependentUpon>CSE136Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="spGetStudentInfo_Result.cs">
-      <DependentUpon>CSE136Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="spGetStudentList_Result.cs">
-      <DependentUpon>CSE136Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>CSE136Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagrams_Result.cs">
-      <DependentUpon>CSE136Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="staff.cs">
-      <DependentUpon>CSE136Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="student.cs">
-      <DependentUpon>CSE136Entities.tt</DependentUpon>
-    </Compile>
     <Compile Include="StudentRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>CSE136Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TeachingAssistant.cs">
-      <DependentUpon>CSE136Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TeachingAssistantType.cs">
-      <DependentUpon>CSE136Entities.tt</DependentUpon>
-    </Compile>
     <Compile Include="TARepository.cs" />
     <Compile Include="TutorRepository.cs" />
   </ItemGroup>
@@ -183,11 +106,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CSE136Entities.edmx</DependentUpon>
       <LastGenOutput>CSE136Entities.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="CSE136Entities.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CSE136Entities.edmx</DependentUpon>
-      <LastGenOutput>CSE136Entities.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

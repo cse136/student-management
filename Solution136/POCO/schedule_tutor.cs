@@ -7,19 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Repository
+namespace POCO
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class spGetStudentInfo_Result
+    public partial class schedule_tutor
     {
+        public int schedule_id { get; set; }
         public string student_id { get; set; }
-        public string ssn { get; set; }
-        public string first_name { get; set; }
-        public string last_name { get; set; }
-        public string email { get; set; }
-        public string password { get; set; }
-        public double shoe_size { get; set; }
-        public int weight { get; set; }
+        public int availability_day_id { get; set; }
+        public int availability_time_id { get; set; }
+    
+        public virtual course_schedule course_schedule { get; set; }
+        public virtual schedule_day schedule_day { get; set; }
+        public virtual schedule_time schedule_time { get; set; }
+        public virtual student student { get; set; }
     }
 }

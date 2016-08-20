@@ -14,10 +14,10 @@
     {
         private const string GetCourseListProcedure = "spGetCourseList";
 
-        public List<Course> GetCourseList(ref List<string> errors)
+        public List<course> GetCourseList(ref List<string> errors)
         {
             var conn = new SqlConnection(ConnectionString);
-            var courseList = new List<Course>();
+            var courseList = new List<course>();
 
             try
             {
@@ -39,16 +39,12 @@
 
                 for (var i = 0; i < dataSet.Tables[0].Rows.Count; i++)
                 {
-                    var course = new Course
+                    var course = new course
                                      {
-                                         CourseId = dataSet.Tables[0].Rows[i]["course_id"].ToString(),
-                                         Title = dataSet.Tables[0].Rows[i]["course_title"].ToString(),
-                                         CourseLevel =
-                                             (CourseLevel)
-                                             Enum.Parse(
-                                                 typeof(CourseLevel),
-                                                 dataSet.Tables[0].Rows[i]["course_level"].ToString()),
-                                         Description = dataSet.Tables[0].Rows[i]["course_description"].ToString()
+                                         course_id = (int)dataSet.Tables[0].Rows[i]["course_id"],
+                                         course_title = dataSet.Tables[0].Rows[i]["course_title"].ToString(),
+                                         course_level = dataSet.Tables[0].Rows[i]["course_level"].ToString(),
+                                         course_description = dataSet.Tables[0].Rows[i]["course_description"].ToString()
                                      };
                     courseList.Add(course);
                 }

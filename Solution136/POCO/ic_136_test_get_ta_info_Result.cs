@@ -7,15 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Repository
+namespace POCO
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class staff
+    public partial class ic_136_test_get_ta_info_Result
     {
-        public int staff_id { get; set; }
-        public string email { get; set; }
-        public string password { get; set; }
+        public int ta_id { get; set; }
+        public int ta_type_id { get; set; }
+        public string first { get; set; }
+        public string last { get; set; }
     }
 }

@@ -7,31 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Repository
+namespace POCO
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class course
+    public partial class classroom
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public course()
+        public classroom()
         {
             this.course_schedule = new HashSet<course_schedule>();
-            this.course1 = new HashSet<course>();
-            this.courses = new HashSet<course>();
         }
     
-        public int course_id { get; set; }
-        public string course_title { get; set; }
-        public string course_level { get; set; }
-        public string course_description { get; set; }
+        public int classroom_id { get; set; }
+        public string classroom_name { get; set; }
+        public int building_id { get; set; }
+        public int max_students { get; set; }
     
+        public virtual building building { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<course_schedule> course_schedule { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<course> course1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<course> courses { get; set; }
     }
 }

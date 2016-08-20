@@ -7,34 +7,25 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Repository
+namespace POCO
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class student
+    public partial class schedule_time
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public student()
+        public schedule_time()
         {
-            this.class_review = new HashSet<class_review>();
-            this.enrollments = new HashSet<enrollment>();
+            this.course_schedule = new HashSet<course_schedule>();
             this.schedule_tutor = new HashSet<schedule_tutor>();
         }
     
-        public string student_id { get; set; }
-        public string ssn { get; set; }
-        public string first_name { get; set; }
-        public string last_name { get; set; }
-        public string email { get; set; }
-        public string password { get; set; }
-        public Nullable<double> shoe_size { get; set; }
-        public Nullable<int> weight { get; set; }
+        public int schedule_time_id { get; set; }
+        public string schedule_time1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<class_review> class_review { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<enrollment> enrollments { get; set; }
+        public virtual ICollection<course_schedule> course_schedule { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<schedule_tutor> schedule_tutor { get; set; }
     }

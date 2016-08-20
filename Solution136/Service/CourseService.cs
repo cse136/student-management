@@ -15,7 +15,7 @@
             this.repository = repository;
         }
 
-        public List<Course> GetCourseList(ref List<string> errors)
+        public List<course> GetCourseList(ref List<string> errors)
         {
             return this.repository.GetCourseList(ref errors);
         }

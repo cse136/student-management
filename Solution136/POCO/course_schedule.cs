@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Repository
+namespace POCO
 {
     using System;
     using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace Repository
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public course_schedule()
         {
-            this.class_review = new HashSet<class_review>();
+            this.course_review = new HashSet<course_review>();
             this.enrollments = new HashSet<enrollment>();
             this.schedule_tutor = new HashSet<schedule_tutor>();
             this.TeachingAssistants = new HashSet<TeachingAssistant>();
@@ -33,9 +33,10 @@ namespace Repository
         public Nullable<int> classroom_id { get; set; }
         public Nullable<int> instructor_id { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<class_review> class_review { get; set; }
         public virtual classroom classroom { get; set; }
+        public virtual course course { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<course_review> course_review { get; set; }
         public virtual instructor instructor { get; set; }
         public virtual schedule_day schedule_day { get; set; }
         public virtual schedule_time schedule_time { get; set; }
@@ -45,6 +46,5 @@ namespace Repository
         public virtual ICollection<schedule_tutor> schedule_tutor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TeachingAssistant> TeachingAssistants { get; set; }
-        public virtual course course { get; set; }
     }
 }

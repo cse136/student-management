@@ -7,23 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Repository
+namespace POCO
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class TeachingAssistantType
+    public partial class building
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TeachingAssistantType()
+        public building()
         {
-            this.TeachingAssistants = new HashSet<TeachingAssistant>();
+            this.classrooms = new HashSet<classroom>();
         }
     
-        public int ta_type_id { get; set; }
-        public string ta_type_desc { get; set; }
+        public int building_id { get; set; }
+        public string building_name { get; set; }
+        public string building_abbr { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TeachingAssistant> TeachingAssistants { get; set; }
+        public virtual ICollection<classroom> classrooms { get; set; }
     }
 }

@@ -7,19 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Repository
+namespace POCO
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class class_review
+    public partial class spGetScheduleList_Result
     {
-        public string student_id { get; set; }
         public int schedule_id { get; set; }
-        public Nullable<int> rating { get; set; }
-        public string comments { get; set; }
-    
-        public virtual course_schedule course_schedule { get; set; }
-        public virtual student student { get; set; }
+        public int year { get; set; }
+        public string quarter { get; set; }
+        public string session { get; set; }
+        public int course_id { get; set; }
+        public string course_title { get; set; }
+        public string course_description { get; set; }
     }
 }

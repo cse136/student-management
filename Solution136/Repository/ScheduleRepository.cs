@@ -52,11 +52,11 @@
                         Year = dataSet.Tables[0].Rows[i]["year"].ToString(), 
                         Quarter = dataSet.Tables[0].Rows[i]["quarter"].ToString(), 
                         Session = dataSet.Tables[0].Rows[i]["session"].ToString(), 
-                        Course = new Course
+                        Course = new course
                         {
-                            CourseId = dataSet.Tables[0].Rows[i]["course_id"].ToString(), 
-                            Title = dataSet.Tables[0].Rows[i]["course_title"].ToString(), 
-                            Description = dataSet.Tables[0].Rows[i]["course_description"].ToString(), 
+                            course_id = (int)dataSet.Tables[0].Rows[i]["course_id"],
+                            course_title = dataSet.Tables[0].Rows[i]["course_title"].ToString(),
+                            course_description = dataSet.Tables[0].Rows[i]["course_description"].ToString(), 
                         }
                     };
                     scheduleList.Add(schedule);

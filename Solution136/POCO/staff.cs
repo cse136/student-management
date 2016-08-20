@@ -7,18 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Repository
+namespace POCO
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class enrollment
+    public partial class staff
     {
-        public string student_id { get; set; }
-        public int schedule_id { get; set; }
-        public string grade { get; set; }
-    
-        public virtual course_schedule course_schedule { get; set; }
-        public virtual student student { get; set; }
+        public int staff_id { get; set; }
+        public string email { get; set; }
+        public string password { get; set; }
     }
 }

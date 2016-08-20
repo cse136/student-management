@@ -6,15 +6,15 @@
     public class AdminController : ApiController
     {
         [HttpGet]
-        public Admin GetAdminInfo(int adminId)
+        public admin GetAdminInfo(int adminId)
         {
             //// 136 TODO: get the admin info 
             //// for now, returning the hard-coded value
-            return new Admin() { FirstName = "Isaac", LastName = "Chu", Id = adminId };
+            return new admin() { FirstName = "Isaac", LastName = "Chu", Id = adminId };
         }
 
         [HttpPost]
-        public string UpdateAdminInfo(Admin admin)
+        public string UpdateAdminInfo(admin admin)
         {
             //// 136 TODO : update admin info here...
             return "update not yet implemented";

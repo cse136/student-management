@@ -1,5 +1,6 @@
 ﻿namespace Repository
 {
+    using POCO;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -26,7 +27,7 @@
             }
         }
 
-        public void UpdateStudent(schedule_tutor student, ref List<string> errors)
+        public void UpdateTutor(schedule_tutor student, ref List<string> errors)
         {
             var context = new cse136Entities();
             try

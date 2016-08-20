@@ -30,7 +30,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
@@ -40,14 +49,100 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin.cs" />
-    <Compile Include="Course.cs" />
+    <Compile Include="Admin.cs">
+      <DependentUpon>CSE136Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="building.cs">
+      <DependentUpon>CSE136Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="classroom.cs">
+      <DependentUpon>CSE136Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Course.cs">
+      <DependentUpon>CSE136Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="CourseLevel.cs" />
-    <Compile Include="Enrollment.cs" />
+    <Compile Include="course_review.cs">
+      <DependentUpon>CSE136Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="course_schedule.cs">
+      <DependentUpon>CSE136Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CSE136Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CSE136Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Enrollment.cs">
+      <DependentUpon>CSE136Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ic_136_test_get_ta_info_Result.cs">
+      <DependentUpon>CSE136Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="instructor.cs">
+      <DependentUpon>CSE136Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Logon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schedule.cs" />
-    <Compile Include="Student.cs" />
+    <Compile Include="schedule_day.cs">
+      <DependentUpon>CSE136Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="schedule_time.cs">
+      <DependentUpon>CSE136Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="schedule_tutor.cs">
+      <DependentUpon>CSE136Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spGetCourseList_Result.cs">
+      <DependentUpon>CSE136Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spGetLoginInfo_Result.cs">
+      <DependentUpon>CSE136Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spGetScheduleList_Result.cs">
+      <DependentUpon>CSE136Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spGetStudentInfo_Result.cs">
+      <DependentUpon>CSE136Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spGetStudentList_Result.cs">
+      <DependentUpon>CSE136Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>CSE136Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>CSE136Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="staff.cs">
+      <DependentUpon>CSE136Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Student.cs">
+      <DependentUpon>CSE136Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>CSE136Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TeachingAssistant.cs">
+      <DependentUpon>CSE136Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TeachingAssistantType.cs">
+      <DependentUpon>CSE136Model.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CSE136Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CSE136Model.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

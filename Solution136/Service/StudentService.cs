@@ -14,7 +14,7 @@
             this.repository = repository;
         }
 
-        public void InsertStudent(Student student, ref List<string> errors)
+        public void InsertStudent(student student, ref List<string> errors)
         {
             if (student == null)
             {
@@ -31,7 +31,7 @@
             this.repository.InsertStudent(student, ref errors);
         }
 
-        public void UpdateStudent(Student student, ref List<string> errors)
+        public void UpdateStudent(student student, ref List<string> errors)
         {
             if (student == null)
             {
@@ -54,7 +54,7 @@
             this.repository.UpdateStudent(student, ref errors);
         }
 
-        public Student GetStudent(string id, ref List<string> errors)
+        public student GetStudent(string id, ref List<string> errors)
         {
             if (string.IsNullOrEmpty(id))
             {
@@ -76,7 +76,7 @@
             this.repository.DeleteStudent(id, ref errors);
         }
 
-        public List<Student> GetStudentList(ref List<string> errors)
+        public List<student> GetStudentList(ref List<string> errors)
         {
             return this.repository.GetStudentList(ref errors);
         }
@@ -103,7 +103,7 @@
             this.repository.DropEnrolledSchedule(studentId, scheduleId, ref errors);
         }
 
-        public List<Enrollment> GetEnrollments(string studentId, ref List<string> errors)
+        public List<enrollment> GetEnrollments(string studentId, ref List<string> errors)
         {
             if (string.IsNullOrEmpty(studentId))
             {

@@ -8,12 +8,23 @@
     using POCO;
     using Service;
 
-
     [TestClass]
     public class ReviewServiceTest
     {
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ReviewNull()
+        {
+            //// Arrange
+            var errors = new List<string>();
+            var mockRepository = new Mock<IReviewRepository>();
+            var reviewService = new ReviewService(mockRepository.Object);
+   
+            //// Act
+            reviewService.InsertReview(null, ref errors);
+        }
+
+        [TestMethod]
         public void StudentCantReviewMoreThanOnce()
         {
             //// Arrange
@@ -23,18 +34,16 @@
             var review = new course_review { student_id = "1", schedule_id = 1, comments = "Great class!", rating = 5 };
             var reviews = new List<course_review> { review };
 
-            mockRepository.Setup(x => x.GetCourseReviews(1, ref errors)).Returns(reviews);
+            mockRepository.Setup(x => x.GetStudentReviews(review.student_id, ref errors)).Returns(reviews);
 
-            try
-            {
-                //// Act
-                reviewService.InsertReview(review, ref errors);
-            }
-            catch (Exception ex)
-            {
-                //// Assert
-                Assert.AreEqual("Can't insert a review twice", ex.Message);
-            }
+            //// Act
+            reviewService.InsertReview(review, ref errors);
+
+            //// Assert
+            mockRepository.Verify(
+                x => x.InsertReview(It.IsAny<course_review>(), ref errors), Times.Never);
+
+            Assert.IsTrue(errors.Contains("Student reviewed the course already"));
         }
 
         [TestMethod]
@@ -49,40 +58,42 @@
 
             //// Act
             reviewService.InsertReview(review, ref errors);
+        }
+
+        [TestMethod]
+        public void StudentDidntTookCourseForReviewing()
+        {
+            //// Arrange
+            var errors = new List<string>();
+            var mockRepository = new Mock<IReviewRepository>();
+            var reviewService = new ReviewService(mockRepository.Object);
+            var review = new course_review { student_id = "1", schedule_id = 1, comments = "Great class!", rating = 5 };
+            var reviews = new List<course_review> { review };
+
+            mockRepository.Setup(x => x.GetStudentReviews(review.student_id, ref errors)).Returns(new List<course_review>());
+            mockRepository.Setup(x => x.StudentTookCourse(review.student_id, review.schedule_id, ref errors)).Returns(false);
+
+            //// Act
+            reviewService.InsertReview(review, ref errors);
 
             //// Assert
             mockRepository.Verify(
                 x => x.InsertReview(It.IsAny<course_review>(), ref errors), Times.Never);
+
+            Assert.IsTrue(errors.Contains("Student can't review a course not taken"));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void StudentDidntTookCourseForReviewing()
-        {
-            //// Arranage
-            var errors = new List<string>();
-            var mockRepository = new Mock<IStudentRepository>();
-            var studentService = new StudentService(mockRepository.Object);
-            var student = new student { student_id = string.Empty };
-
-            //// Act
-            studentService.InsertStudent(student, ref errors);
-
-            //// Assert
-            Assert.AreEqual(1, errors.Count);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void StudentReviewInserted()
         {
             //// Arrange
             var errors = new List<string>();
 
             var mockRepository = new Mock<IReviewRepository>();
-            var review = new course_review { student_id = "1", schedule_id = 1, comments = "Great class!", rating = 11 };
+            var review = new course_review { student_id = "1", schedule_id = 1, comments = "Great class!", rating = 10 };
 
-            mockRepository.Setup(x => x.InsertReview(review, ref errors)).Verifiable();
+            mockRepository.Setup(x => x.GetStudentReviews(review.student_id, ref errors)).Returns(new List<course_review>());
+            mockRepository.Setup(x => x.StudentTookCourse(review.student_id, review.schedule_id, ref errors)).Returns(true);
 
             var reviewService = new ReviewService(mockRepository.Object);
 
@@ -92,6 +103,5 @@
             //// Assert
             mockRepository.Verify(x => x.InsertReview(It.IsAny<course_review>(), ref errors), Times.Once);
         }
-
     }
 }

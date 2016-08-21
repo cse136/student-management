@@ -5,6 +5,7 @@
     using System.Data;
     using System.Data.SqlClient;
     using System.Linq;
+    
     using IRepository;
 
     using POCO;
@@ -145,16 +146,19 @@
             }
         }
 
-        public ICollection<course_schedule> GetCurrentStudentEnrollments(string student_id, ref List<string> errors)
+        public course_schedule GetScheduledCourseDetails(int schedule_id, ref List<string> errors)
         {
-            var list = new List<course_schedule>();
+            var schedule = new course_schedule();
             var context = new cse136Entities();
 
             try
             {
-                list = context.enrollments.Include("course_schedule")
-                    .Where(e => e.student_id == student_id && e.grade == null)
-                    .Select(e => e.course_schedule).ToList();
+                schedule = context.course_schedule.Where(cs => cs.schedule_id == schedule_id).FirstOrDefault();
+
+                if (schedule == null)
+                {
+                    throw new Exception("Scheduled course not found");
+                }
             }
             catch (Exception e)
             {
@@ -165,7 +169,7 @@
                 context.Dispose();
             }
 
-            return list;
+            return schedule;
         }
     }
 }

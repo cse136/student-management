@@ -111,12 +111,12 @@
                 throw new ArgumentException();
             }
 
-            return this.repository.GetEnrollments(studentId);
+            return this.repository.GetEnrollments(studentId, ref errors);
         }
 
         public float CalculateGpa(string studentId, ref List<string> errors)
         {
-            var enrollments = this.repository.GetEnrollments(studentId);
+            var enrollments = this.repository.GetEnrollments(studentId, ref errors);
 
             if (string.IsNullOrEmpty(studentId))
             {
@@ -139,10 +139,41 @@
 
             foreach (var enrollment in enrollments)
             {
-                sum += enrollment.gradeValue;
+                sum += enrollment.GradeValue;
             }
 
             return sum / enrollments.Count;
+        }
+
+        public float GetGradeValueFromGrade(string grade)
+        {
+            switch (grade)
+            {
+                case "A+":
+                    return 4.3f;          
+                case "A":
+                    return 4.0f;
+                case "A-":
+                    return 3.7f;
+                case "B+":
+                    return 3.3f;
+                case "B":
+                    return 3f;
+                case "B-":
+                    return 2.7f;
+                case "C+":
+                    return 2.3f;
+                case "C":
+                    return 2f;
+                case "C-":
+                    return 1.7f;
+                case "D":
+                    return 1f;
+                case "F":
+                    return 0f;
+                default:
+                    throw new ArgumentException();  
+            }
         }
     }
 }

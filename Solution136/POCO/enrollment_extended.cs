@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace POCO
+﻿namespace POCO
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
     public partial class enrollment
     {
-        public float gradeValue { get; set; }
+        public float GradeValue { get; set; }
     }
 }

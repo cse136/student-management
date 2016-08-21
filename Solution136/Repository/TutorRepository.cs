@@ -1,13 +1,14 @@
 ﻿namespace Repository
 {
-    using POCO;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using IRepository;
+    using POCO;
 
-    public class TutorRepository
+    public class TutorRepository : ITutorRepository
     {
         public void InsertTutor(schedule_tutor student, ref List<string> errors)
         {
@@ -34,13 +35,11 @@
             {
                 var result_student = context.schedule_tutor.SingleOrDefault(s =>
                     s.student_id == student.student_id &&
-                    s.course_schedule == student.course_schedule);
+                    s.schedule_id == student.schedule_id);
 
-                if (result_student != null)
+                if (result_student == null)
                 {
-                    result_student.availability_day_id = student.availability_day_id;
-                    result_student.availability_time_id = student.availability_time_id;
-                    context.SaveChanges();
+                    throw new Exception("Tutor data not found");
                 }
             }
             catch (Exception e)
@@ -53,7 +52,7 @@
             }
         }
 
-        public void DeleteStudent(string student_id, int schedule_id, ref List<string> errors)
+        public void DeleteTutor(string student_id, int schedule_id, ref List<string> errors)
         {
             var context = new cse136Entities();
 
@@ -77,6 +76,28 @@
             {
                 context.Dispose();
             }
+        }
+
+        public List<schedule_tutor> GetStudentTutorings(string student_id, ref List<string> errors)
+        {
+            var context = new cse136Entities();
+
+            var list = new List<schedule_tutor>();
+
+            try
+            {
+                list = context.schedule_tutor.Include("course_schedule").Where(st => st.student_id == student_id).ToList();
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+            finally
+            {
+                context.Dispose();
+            }
+
+            return list;
         }
     }
 }

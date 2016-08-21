@@ -106,6 +106,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CSE136Entities.edmx</DependentUpon>
       <LastGenOutput>CSE136Entities.Context.cs</LastGenOutput>
+      <CustomToolNamespace>POCO</CustomToolNamespace>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

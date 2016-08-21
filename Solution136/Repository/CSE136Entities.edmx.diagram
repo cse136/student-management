@@ -16,7 +16,7 @@
         <EntityTypeShape EntityType="cse136Model.schedule_day" Width="1.5" PointX="0.75" PointY="6" />
         <EntityTypeShape EntityType="cse136Model.schedule_time" Width="1.5" PointX="0.75" PointY="20.5" />
         <EntityTypeShape EntityType="cse136Model.schedule_tutor" Width="1.5" PointX="8.25" PointY="5.625" />
-        <EntityTypeShape EntityType="cse136Model.staff" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="cse136Model.staff" Width="1.5" PointX="9.875" PointY="0.875" />
         <EntityTypeShape EntityType="cse136Model.student" Width="1.5" PointX="3" PointY="14.375" />
         <EntityTypeShape EntityType="cse136Model.sysdiagram" Width="1.5" PointX="7.75" PointY="9.75" />
         <EntityTypeShape EntityType="cse136Model.TeachingAssistant" Width="1.5" PointX="5.25" PointY="2.875" />

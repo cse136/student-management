@@ -19,5 +19,10 @@
         {
             return this.repository.GetScheduleList(year, quarter, ref errors);
         }
+
+        public course_schedule GetScheduledCourseDetails(int schedule_id, ref List<string> errors)
+        {
+            return this.repository.GetScheduledCourseDetails(schedule_id, ref errors);
+        }
     }
 }

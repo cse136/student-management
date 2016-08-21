@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
+    using System.Linq;
     using IRepository;
     using POCO;
 
@@ -177,7 +178,7 @@
                         var schedule = new course_schedule();
                         var course = new course
                                          {
-                                             course_id = (int) dataSet.Tables[1].Rows[i]["course_id"],
+                                             course_id = (int)dataSet.Tables[1].Rows[i]["course_id"],
                                              course_title = dataSet.Tables[1].Rows[i]["course_title"].ToString(),
                                              course_description =
                                                  dataSet.Tables[1].Rows[i]["course_description"].ToString()
@@ -328,10 +329,27 @@
             }
         }
 
-        public List<enrollment> GetEnrollments(string studentId)
+        public List<enrollment> GetEnrollments(string student_id, ref List<string> errors)
         {
-            //// Not implemented yet. 136 TODO:
-            throw new Exception();
+            var list = new List<enrollment>();
+            var context = new cse136Entities();
+
+            try
+            {
+                list = context.enrollments.Include("course_schedule")
+                    .Where(e => e.student_id == student_id)
+                    .ToList();
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+            finally
+            {
+                context.Dispose();
+            }
+
+            return list;
         }
     }
 }

@@ -32,6 +32,35 @@
             }
         }
 
+        public ICollection<TeachingAssistant> GetCourseTAs(int schedule_id, ref List<string> errors)
+        {
+            var list = new List<TeachingAssistant>();
+            var context = new cse136Entities();
+
+            try
+            {
+                var course = context.course_schedule.Include("TeachingAssistants")
+                    .Where(cs => cs.schedule_id == schedule_id).FirstOrDefault();
+
+                if (course == null)
+                {
+                    throw new Exception("Course for ID provided doesn't exist");
+                }
+
+                list = course.TeachingAssistants.ToList();
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+            finally
+            {
+                context.Dispose();
+            }
+
+            return list;
+        }
+
         public void UpdateTA(TeachingAssistant ta, ref List<string> errors)
         {
             var context = new cse136Entities();
@@ -86,22 +115,35 @@
             }
         }
 
-        public ICollection<TeachingAssistant> GetCourseTAs(int schedule_id, ref List<string> errors)
+        public ICollection<TeachingAssistant> GetTAs(ref List<string> errors)
         {
             var list = new List<TeachingAssistant>();
             var context = new cse136Entities();
-            
+
             try
             {
-                var course = context.course_schedule.Include("TeachingAssistants")
-                    .Where(cs => cs.schedule_id == schedule_id).FirstOrDefault();
+                list = context.TeachingAssistants.ToList();
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+            finally
+            {
+                context.Dispose();
+            }
 
-                if (course == null)
-                {
-                    throw new Exception("Course for ID provided doesn't exist");
-                }
-                
-                list = course.TeachingAssistants.ToList();
+            return list;
+        }
+
+        public ICollection<TeachingAssistantType> GetTATypes(ref List<string> errors)
+        {
+            var list = new List<TeachingAssistantType>();
+            var context = new cse136Entities();
+
+            try
+            {
+                list = context.TeachingAssistantTypes.ToList();
             }
             catch (Exception e)
             {

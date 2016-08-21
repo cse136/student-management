@@ -71,6 +71,7 @@
     <Compile Include="ErrorLog\LogToDb.cs" />
     <Compile Include="ErrorLog\LogToFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TAService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IRepository\IRepository.csproj">

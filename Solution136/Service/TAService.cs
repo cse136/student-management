@@ -34,6 +34,12 @@ namespace Service
 
             ValidateTAType(ta.ta_type_id, ref errors);
 
+            if (TAExists(ta.ta_id, ref errors))
+            {
+                errors.Add("Cannot insert duplicate TAs in a course");
+                throw new ArgumentException();
+            }
+            
             if (String.IsNullOrEmpty(ta.last))
             {
                 errors.Add("TA last name cannot be null or empty");
@@ -123,7 +129,7 @@ namespace Service
             }
         }
 
-        public void TAExists(int ta_id, ref List<string> errors)
+        public Boolean TAExists(int ta_id, ref List<string> errors)
         {
             var TAs = this.repository.GetTAs(ref errors);
 
@@ -132,6 +138,8 @@ namespace Service
                 errors.Add("TA does not exist");
                 throw new ArgumentException();
             }
+
+            return true;
         }
     }
 }

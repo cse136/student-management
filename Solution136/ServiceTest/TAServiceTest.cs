@@ -19,9 +19,17 @@
             var errors = new List<string>();
             var mockRepository = new Mock<ITARepository>();
             var TAService = new TAService(mockRepository.Object);
-            var ta = new TeachingAssistant { ta_id = 1, ta_type_id = -1, first = "John", last = "Doe" };
+            var ta = new TeachingAssistant { ta_id = Int32.MaxValue, ta_type_id = -1, first = "John", last = "Doe" };
 
             mockRepository.Setup(x => x.GetTATypes(ref errors)).Returns(new List<TeachingAssistantType>());
+            mockRepository.Setup(x => x.GetTAs(ref errors)).Returns(
+                new List<TeachingAssistant>()
+                {
+                    new TeachingAssistant()
+                    {
+                         ta_id = Int32.MaxValue
+                    }
+                });
 
             try
             {
@@ -35,32 +43,32 @@
             }
         }
 
-        //[TestMethod]
-        ////[ExpectedException(typeof(ArgumentOutOfRangeException))]
-        //public void DuplicateTAInCourse()
-        //{
-        //    //// Arranage
-        //    var errors = new List<string>();
-        //    var mockRepository = new Mock<ITARepository>();
-        //    var TAService = new TAService(mockRepository.Object);
-        //    var taOriginal = new TeachingAssistant { ta_id = 1, ta_type_id = 1, first = "John", last = "Doe" };
-        //    var taDuplicate = new TeachingAssistant { ta_id = 1, ta_type_id = 1, first = "John", last = "Doe" };
+        [TestMethod]
+        public void DuplicateTAInCourse()
+        {
+            //// Arranage
+            var errors = new List<string>();
+            var mockRepository = new Mock<ITARepository>();
+            var TAService = new TAService(mockRepository.Object);
+            var taOriginal = new TeachingAssistant { ta_id = Int32.MaxValue, ta_type_id = 1, first = "John", last = "Doe" };
+            var taDuplicate = new TeachingAssistant { ta_id = Int32.MaxValue, ta_type_id = 1, first = "John", last = "Doe" };
 
-        //    try
-        //    {
-        //        //// Act
-        //        TAService.InsertTA(taOriginal, ref errors);
-        //        TAService.InsertTA(taDuplicate, ref errors);
-        //    }
-        //    catch (ArgumentException ex)
-        //    {
-        //        //// Assert
-        //        Assert.IsTrue(errors.Contains("Cannot insert duplicate TAs in a course"));
-        //    }
-        //}
+            mockRepository.Setup(x => x.GetTAs(ref errors)).Returns(new List<TeachingAssistant>());
+
+            try
+            {
+                //// Act
+                TAService.InsertTA(taOriginal, ref errors);
+                TAService.InsertTA(taDuplicate, ref errors);
+            }
+            catch (ArgumentException ex)
+            {
+                //// Assert
+                Assert.IsTrue(errors.Contains("Cannot insert duplicate TAs in a course"));
+            }
+        }
 
         [TestMethod]
-        //[ExpectedException(typeof(ArgumentException))]
         public void UpdateNonexistantTA()
         {
             //// Arranage
@@ -69,6 +77,8 @@
             var TAService = new TAService(mockRepository.Object);
             var nonexistant_ta_id = Int32.MaxValue;
             var ta = new TeachingAssistant { ta_id = nonexistant_ta_id, ta_type_id = 1, first = "Fake", last = "TA" };
+
+            mockRepository.Setup(x => x.GetTAs(ref errors)).Returns(new List<TeachingAssistant>());
 
             try
             {

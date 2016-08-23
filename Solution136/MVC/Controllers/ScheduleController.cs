@@ -8,5 +8,10 @@
         {
             return this.View("Index");
         }
+
+        public ActionResult ViewCourseReviews()
+        {
+            return View();
+        }
     }
 }

@@ -5,4 +5,84 @@
 
 <h3>Schedule of classes</h3>
 
-136 TODO: Show a list of course schedule & filtered by year & quarter
+<p>
+    <input type="text" placeholder="Type a course name" id="course_name" />
+
+    <select id="year">
+        <option value="2016" selected="selected">2016</option>
+        <option value="2015">2015</option>
+        <option value="2014">2014</option>
+    </select>
+
+    <select id="quarter">
+        <option  value="Fall">Fall</option>
+        <option  value="Winter">Winter</option>
+        <option  value="Spring">Spring</option>
+        <option  value="Summer 1">Summer 1</option>
+        <option  value="Summer 2" selected="selected">Summer 2</option>
+    </select>
+
+    <input type="button" value="Filter" id="filter">
+</p>
+
+<table id="scheduled_courses">
+    <tr>
+        <th>
+            Year
+        </th>
+        <th>
+            Quarter
+        </th>
+        <th>
+            Course
+        </th>
+        <th>
+            Title
+        </th>
+        <th>
+            Days
+        </th>
+        <th>
+            Times
+        </th>
+        <th>
+            Classroom
+        </th>
+        <th>
+            Instructor
+        </th>
+        <th>
+            <!-- If the user is an admin, show the link for adding a TA.
+                 Otherwise the link for enrolling (dropping if already enrolled) -->
+        </th>
+        <th>
+            <!-- Enroll as a tutor link (drop as tutor) -->
+        </th>
+    </tr>
+    <tr>
+        <td>
+            2016
+        </td>
+        <td>
+            Summer 2
+        </td>
+        <td>
+            CSE 100
+        </td>
+        <td>
+            Advanced Data Structures
+        </td>
+        <td>
+            Mon-Thu
+        </td>
+        <td>
+            4:00pm-5:30pm
+        </td>
+        <td>
+            WLH 2005
+        </td>
+        <td>
+            Cao, Yingjun
+        </td>
+    </tr>
+</table>

@@ -14,12 +14,7 @@
             return this.View();
         }
 
-        public ActionResult CreateStudent()
-        {
-            return this.View();
-        }
-
-        public ActionResult EditStudent(string id)
+        public ActionResult AddTAToCourse()
         {
             return this.View();
         }

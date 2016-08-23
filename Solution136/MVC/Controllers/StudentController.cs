@@ -15,5 +15,31 @@
             ViewBag.Id = id;
             return this.View();
         }
+
+        // Probably do it with one click from the schedule page :)
+        public ActionResult EnrollToCourse()
+        {
+            return this.View();
+        }
+
+        public ActionResult EnrollAsTutor()
+        {
+            return this.View();
+        }
+        public ActionResult DropTutoredCourse()
+        {
+            return this.View();
+        }
+
+        // Probably do it with one click from the schedule page :)
+        public ActionResult DropCourse()
+        {
+            return this.View();
+        }
+
+        public ActionResult AddReviewToCourse()
+        {
+            return this.View();
+        }
     }
 }

@@ -1,14 +1,14 @@
-﻿using IRepository;
-using POCO;
-using Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Service
+﻿namespace Service
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using IRepository;
+    using POCO;
+    using Repository;
+
     public class TAService
     {
         private readonly ITARepository repository;
@@ -32,15 +32,15 @@ namespace Service
                 throw new ArgumentException();
             }
 
-            ValidateTAType(ta.ta_type_id, ref errors);
+            this.ValidateTAType(ta.ta_type_id, ref errors);
 
-            if (TAExists(ta.ta_id, ref errors))
+            if (this.TAExists(ta.ta_id, ref errors))
             {
                 errors.Add("Cannot insert duplicate TAs in a course");
                 throw new ArgumentException();
             }
             
-            if (String.IsNullOrEmpty(ta.last))
+            if (string.IsNullOrEmpty(ta.last))
             {
                 errors.Add("TA last name cannot be null or empty");
                 throw new ArgumentException();
@@ -68,11 +68,11 @@ namespace Service
                 throw new ArgumentException();
             }
 
-            TAExists(ta.ta_id, ref errors);
+            this.TAExists(ta.ta_id, ref errors);
 
-            ValidateTAType(ta.ta_type_id, ref errors);
+            this.ValidateTAType(ta.ta_type_id, ref errors);
 
-            if (String.IsNullOrEmpty(ta.last))
+            if (string.IsNullOrEmpty(ta.last))
             {
                 errors.Add("TA last name cannot be null or empty");
                 throw new ArgumentException();
@@ -118,7 +118,7 @@ namespace Service
             this.repository.DeleteTA(ta_id, ref errors);
         }
 
-        public void ValidateTAType(int ta_type_id, ref List<string> errors)
+        private void ValidateTAType(int ta_type_id, ref List<string> errors)
         {
             var types = this.repository.GetTATypes(ref errors);
 
@@ -129,11 +129,11 @@ namespace Service
             }
         }
 
-        public Boolean TAExists(int ta_id, ref List<string> errors)
+        private bool TAExists(int ta_id, ref List<string> errors)
         {
-            var TAs = this.repository.GetTAs(ref errors);
+            var tas = this.repository.GetTAs(ref errors);
 
-            if (TAs.Count(ta => ta.ta_id == ta_id) == 0)
+            if (tas.Count(ta => ta.ta_id == ta_id) == 0)
             {
                 errors.Add("TA does not exist");
                 throw new ArgumentException();

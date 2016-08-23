@@ -62,7 +62,9 @@
     <Compile Include="StudentServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AuthorizeServiceTest.cs" />
-    <Compile Include="TAServiceTest.cs" />
+    <Compile Include="TAServiceTest.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="TutorServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>

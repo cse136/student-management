@@ -5,9 +5,10 @@
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using IRepository;
     using POCO;
 
-    public class TARepository
+    public class TARepository : ITARepository
     {
         public void InsertTA(TeachingAssistant ta, ref List<string> errors)
         {

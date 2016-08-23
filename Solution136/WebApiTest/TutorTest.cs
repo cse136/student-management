@@ -39,7 +39,7 @@
         {
             var tutorController = new TutorController();
 
-            var result = tutorController.DeleteTutor("A000002", 116);
+            var result = tutorController.DeleteTutor("A000001", 100);
             Assert.AreEqual("ok", result);
         }
 

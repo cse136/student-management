@@ -1,12 +1,12 @@
-﻿using POCO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IRepository
+﻿namespace IRepository
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using POCO;
+
     public interface ITARepository
     {
         void InsertTA(TeachingAssistant ta, ref List<string> errors);

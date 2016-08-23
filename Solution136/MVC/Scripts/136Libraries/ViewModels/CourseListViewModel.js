@@ -12,7 +12,7 @@
 
             // DTO from the JSON model to the view model. In this case, courseListViewModel doesn't need the "id" attribute
             for (var i = 0; i < courseListData.length; i++) {
-                courseListViewModel[i] = { title: courseListData[i].Title, description: courseListData[i].Description };
+                courseListViewModel[i] = { title: courseListData[i].course_title, description: courseListData[i].course_description };
             }
 
             // this is using knockoutjs to bind the viewModel and the view (Home/Index.cshtml)

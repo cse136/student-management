@@ -5,7 +5,18 @@ using System.Web;
 
 namespace MVC.Controllers
 {
-    public class TAController
+    using System.Web.Mvc;
+
+    public class TAController : Controller
     {
+        public ActionResult Index()
+        {
+            return this.View("Index");
+        }
+
+        public ActionResult ViewStudentsInEnrollment()
+        {
+            return View();
+        }
     }
 }

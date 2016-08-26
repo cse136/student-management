@@ -14,6 +14,11 @@
             return this.View();
         }
 
+        public ActionResult TAList()
+        {
+            return this.View();
+        }
+
         public ActionResult AddTAToCourse()
         {
             return this.View();

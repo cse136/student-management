@@ -213,6 +213,7 @@
     <Content Include="Views\FinancialAid\Loans.cshtml" />
     <Content Include="Views\TA\Index.cshtml" />
     <Content Include="Views\TA\ViewStudentsInEnrollment.cshtml" />
+    <Content Include="Views\Staff\TAList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

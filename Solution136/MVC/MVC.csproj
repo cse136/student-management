@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\CustomAuthorizeAttribute.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -203,7 +204,6 @@
     <Content Include="Views\Shared\SharedEditStudent.cshtml" />
     <Content Include="Views\Shared\SharedStudentEnrollment.cshtml" />
     <Content Include="Views\Staff\CreateStudent.cshtml" />
-    <Content Include="Views\Staff\EditStudent.cshtml" />
     <Content Include="Views\Staff\Index.cshtml" />
     <Content Include="Views\Staff\StudentList.cshtml" />
     <Content Include="Views\Student\Edit.cshtml" />
@@ -214,32 +214,27 @@
     <Content Include="Views\Admin\InstructorList.cshtml" />
     <Content Include="Views\Admin\CreateInstructor.cshtml" />
     <Content Include="Views\Admin\EditInstructor.cshtml" />
-    <Content Include="Views\Admin\CreateScheduledCourse.cshtml" />
-    <Content Include="Views\Admin\EditScheduledCourse.cshtml" />
-    <Content Include="Views\Admin\CourseList.cshtml" />
+    <Content Include="Views\Student\CourseList.cshtml" />
     <Content Include="Views\Admin\CreateCourse.cshtml" />
     <Content Include="Views\Admin\EditCourse.cshtml" />
-    <Content Include="Views\Admin\CourseDetails.cshtml" />
+    <Content Include="Views\Student\CourseDetails.cshtml" />
     <Content Include="Views\Admin\AddCoursePrereq.cshtml" />
     <Content Include="Views\Staff\CreateTA.cshtml" />
     <Content Include="Views\Staff\EditTA.cshtml" />
     <Content Include="Views\Staff\AddTAToScheduledCourse.cshtml" />
     <Content Include="Views\Staff\ScheduledCourseStudentList.cshtml" />
     <Content Include="Views\Student\CreateReview.cshtml" />
-    <Content Include="Views\Admin\ScheduledCourseList.cshtml" />
+    <Content Include="Views\Student\ScheduledCourseList.cshtml" />
     <Content Include="Views\Staff\ScheduledCourseList.cshtml" />
-    <Content Include="Views\Admin\CreateStudent.cshtml" />
     <Content Include="Views\Admin\TAList.cshtml" />
-    <Content Include="Views\Admin\CreateTA.cshtml" />
-    <Content Include="Views\Admin\AddTAToScheduledCourse.cshtml" />
-    <Content Include="Views\Admin\EditTA.cshtml" />
-    <Content Include="Views\Admin\EditStudent.cshtml" />
-    <Content Include="Views\Admin\ScheduledCourseStudentList.cshtml" />
-    <Content Include="Views\Admin\ScheduledCourseReviews.cshtml" />
-    <Content Include="Views\Admin\StudentDetails.cshtml" />
+    <Content Include="Views\Student\ScheduledCourseStudentList.cshtml" />
+    <Content Include="Views\Student\ScheduledCourseReviews.cshtml" />
+    <Content Include="Views\Student\StudentDetails.cshtml" />
     <Content Include="Views\Admin\TADetails.cshtml" />
-    <Content Include="Views\Admin\AddTutorToScheduledCourse.cshtml" />
+    <Content Include="Views\Student\AddTutorToScheduledCourse.cshtml" />
     <Content Include="Views\Shared\SharedCreateTA.cshtml" />
+    <Content Include="Views\Staff\CreateScheduledCourse.cshtml" />
+    <Content Include="Views\Staff\EditScheduledCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

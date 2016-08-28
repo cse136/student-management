@@ -1,0 +1,210 @@
+﻿@{
+    ViewBag.Title = "Browse TAs";
+}
+
+<ol class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/Admin?id=1">Admin</a></li>
+    <li><a href="/Admin/TAList">Browse TAs</a></li>
+    <li class="active">TA Details</li>
+</ol>
+
+<h3>TA Patrick Wong</h3>
+<p>
+    <table class="table">
+        <caption>Details</caption>
+        <tr>
+            <th class="col-sm-2">Type</th>
+            <td class="col-sm-3">Lower</td>
+            <td />
+        </tr>
+    </table>
+</p>
+
+
+<!-- Show links to drop course -->
+<!-- Show list of current tutored courses -->
+<!-- Show link to drop tutored course -->
+<!-- Show link to add review -->
+
+<p>
+    <table class="table" id="scheduled_courses">
+        <caption>Current Courses</caption>
+        <tr>
+            <th>
+                Year
+            </th>
+            <th>
+                Quarter
+            </th>
+            <th>
+                Course
+            </th>
+            <th>
+                Section
+            </th>
+            <th>
+                Title
+            </th>
+            <th>
+                Days
+            </th>
+            <th>
+                Times
+            </th>
+            <th>
+                Classroom
+            </th>
+            <th>
+                Instructor
+            </th>
+
+
+            <!-- If the user is an admin, show the link for adding a TA, editing scheduled course. Viewing list of enrollments.
+            Otherwise the link for enrolling (dropping if already enrolled) -->
+            <!-- Enroll as a tutor link (drop as tutor) -->
+
+        </tr>
+        <tr>
+            <td>
+                2016
+            </td>
+            <td>
+                Summer 2
+            </td>
+            <td>
+                CSE 100
+            </td>
+            <td>
+                A00
+            </td>
+            <td>
+                Advanced Data Structures
+            </td>
+            <td>
+                Mon-Thu
+            </td>
+            <td>
+                4:00pm-5:30pm
+            </td>
+            <td>
+                WLH 2005
+            </td>
+            <td>
+                Cao, Yingjun
+            </td>
+
+
+            <!-- If the user is an admin, show the link for adding a TA, editing scheduled course. Viewing list of enrollments.
+            Otherwise the link for enrolling (dropping if already enrolled) -->
+            <td>
+                <a href="/Admin/TAList">Remove</a>
+            </td>
+
+        </tr>
+    </table>
+</p>
+
+
+
+<p>
+    <table class="table" id="scheduled_courses">
+        <caption>Past Courses</caption>
+        <tr>
+            <th>
+                Year
+            </th>
+            <th>
+                Quarter
+            </th>
+            <th>
+                Course
+            </th>
+            <th>
+                Section
+            </th>
+            <th>
+                Title
+            </th>
+            <th>
+                Days
+            </th>
+            <th>
+                Times
+            </th>
+            <th>
+                Classroom
+            </th>
+            <th>
+                Instructor
+            </th>
+  
+            <!-- If the user is an admin, show the link for adding a TA, editing scheduled course. Viewing list of enrollments.
+            Otherwise the link for enrolling (dropping if already enrolled) -->
+            <!-- Enroll as a tutor link (drop as tutor) -->
+
+        </tr>
+        <tr>
+            <td>
+                2015
+            </td>
+            <td>
+                Summer 2
+            </td>
+            <td>
+                CSE 30
+            </td>
+            <td>
+                A00
+            </td>
+            <td>
+                Computer Architecture
+            </td>
+            <td>
+                Mon-Thu
+            </td>
+            <td>
+                4:00pm-5:30pm
+            </td>
+            <td>
+                WLH 2005
+            </td>
+            <td>
+                Ord, Rick
+            </td>
+         
+
+        </tr>
+        <tr>
+            <td>
+                2014
+            </td>
+            <td>
+                Summer 2
+            </td>
+            <td>
+                CSE 15L
+            </td>
+            <td>
+                A00
+            </td>
+            <td>
+                Computer Lab
+            </td>
+            <td>
+                Mon-Thu
+            </td>
+            <td>
+                4:00pm-5:30pm
+            </td>
+            <td>
+                WLH 2005
+            </td>
+            <td>
+                Gillespie, Gary
+            </td>
+   
+
+        </tr>
+    </table>
+</p>

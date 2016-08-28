@@ -5,6 +5,7 @@
     using System.Web.Mvc;
     using System.Web.Script.Serialization;
     using Models;
+    using System.Web.Security;
 
     public class LoginController : Controller
     {
@@ -29,6 +30,9 @@
 
                     var jsonSerializer = new JavaScriptSerializer();
                     var logon = jsonSerializer.Deserialize<LogonResult>(responseFromServer);
+
+                    this.Session["role"] = logon.Role;
+                    this.Session["id"] = logon.Id;
 
                     switch (logon.Role)
                     {

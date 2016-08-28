@@ -23,5 +23,10 @@
         {
             return this.View();
         }
+
+        public ActionResult CreateTA()
+        {
+            return this.View();
+        }
     }
 }

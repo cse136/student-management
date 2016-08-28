@@ -238,6 +238,8 @@
     <Content Include="Views\Admin\ScheduledCourseReviews.cshtml" />
     <Content Include="Views\Admin\StudentDetails.cshtml" />
     <Content Include="Views\Admin\TADetails.cshtml" />
+    <Content Include="Views\Admin\AddTutorToScheduledCourse.cshtml" />
+    <Content Include="Views\Shared\SharedCreateTA.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

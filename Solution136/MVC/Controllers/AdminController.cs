@@ -26,6 +26,11 @@
             return this.View();
         }
 
+        public ActionResult AddTutorToScheduledCourse()
+        {
+            return this.View();
+        }
+
         public ActionResult CourseDetails()
         {
             return this.View();

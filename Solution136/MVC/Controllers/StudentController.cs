@@ -37,7 +37,7 @@
             return this.View();
         }
 
-        public ActionResult AddReviewToCourse()
+        public ActionResult CreateReview()
         {
             return this.View();
         }

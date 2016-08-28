@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Browse Instructors";
+}
+
+<ol class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/Admin?id=1">Admin</a></li>
+    <li class="active">Browse Instructors</li>
+</ol>
+
+<h3>Browse Instructors</h3>
+<br />
+<form class="form-horizontal">
+    <p>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="title">Title</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="title">
+                    <option value="all" selected="selected">All</option>
+                    <option value="Adjunct Faculty">Adjunct Faculty</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="name">Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" placeholder="Please type an instructor name">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-default">Filter instructors</button>
+    </p>
+</form>
+
+<p>
+    <table class="table" id="scheduled_courses">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Title
+            </th>
+        </tr>
+        <tr>
+            <td>
+                Isaac Chu
+            </td>
+            <td>
+                Adjunt Faculty
+            </td>
+            <td>
+                <a href="/Admin/ScheduledCourseList?instructor=1">View scheduled courses</a>
+            </td>
+            <td>
+                <a href="/Admin/EditInstructor?id=1">Edit</a>
+            </td>
+        </tr>
+    </table>
+</p>

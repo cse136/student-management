@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Course Pre-requisites";
+}
+
+<ol class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/Admin?id=1">Admin</a></li>
+    <li><a href="/Admin/CourseList">Browse Courses</a></li>
+    <li class="active">Course Pre-requisites</li>
+</ol>
+
+<h3>CSE 110 Pre-requisites</h3>
+<br />
+<!-- Add link for removing course from prereqs -->
+<!-- Add link fo adding a prereq to the course -->
+<p>
+    <a href="/Admin/AddCoursePrereq?id=25">New pre-requisite</a>
+</p>
+<p>
+    <table class="table" id="scheduled_courses">
+        <tr>
+            <th>
+                Course
+            </th>
+            <th>
+                Title
+            </th>
+        </tr>
+        <tr>
+            <td>
+                CSE 21
+            </td>
+            <td>
+                Mathematics for Algorithms and Systems
+            </td>
+            <td>
+                <a href="/Admin/CourseList">Remove</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                CSE 100
+            </td>
+            <td>
+                Advanced Data Structures
+            </td>
+            <td>
+                <a href="/Admin/CourseList">Remove</a>
+            </td>
+        </tr>
+    </table>
+</p>
+

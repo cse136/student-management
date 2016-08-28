@@ -22,3 +22,16 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.breadcrumb > li + li:before {
+   color: #CCCCCC;
+   content: "/ ";
+   padding: 0 5px;
+}
+
+.caption {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: #777;
+    text-align: left;
+}

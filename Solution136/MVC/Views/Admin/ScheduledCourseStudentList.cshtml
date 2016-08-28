@@ -1,0 +1,163 @@
+﻿@{
+    ViewBag.Title = "Scheduled Course Detail";
+}
+
+<ol class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/Admin?id=1">Admin</a></li>
+    <li><a href="/Admin/ScheduledCourseList">Browse Course Schedule</a></li>
+    <li class="active">Scheduled Course Details</li>
+</ol>
+
+<h3>Summer 1, 2016</h3>
+<h3>CSE 110, Section A00</h3>
+
+<p>
+    <table class="table">
+        <caption>Details</caption>
+        <tr>
+            <th class="col-sm-2">Title</th>
+            <td class="col-sm-3">Software Engineering</td>
+            <td/>
+        </tr>
+        <tr>
+            <th class="col-sm-2">Days</th>
+            <td class="col-sm-3">Mon-Thu</td>
+            <td />
+        </tr>
+        <tr>
+            <th class="col-sm-2">Times</th>
+            <td class="col-sm-3">4:00pm-5:30pm</td>
+            <td />
+        </tr>
+        <tr>
+            <th class="col-sm-2">Classroom</th>
+            <td class="col-sm-3">WLH 2001</td>
+            <td />
+        </tr>
+        <tr>
+            <th class="col-sm-2">Instructor</th>
+            <td class="col-sm-3">Gary Gillespie</td>
+            <td />
+        </tr>
+        <tr>
+            <th class="col-sm-2">Rating</th>
+            <td class="col-sm-3">9.5</td>
+            <td class="col-sm-7"><a href="/Admin/ScheduledCourseReviews?id=25">View course ratings</a></td>
+        </tr>
+    </table>
+</p>
+
+
+<p>
+
+    <table class="table" id="scheduled_courses">
+
+
+        <caption>TAs </caption>
+        <tr>
+            <td>
+                <a href="/Admin/AddTAToScheduledCourse?id=25">Add TA</a>
+            </td>
+        </tr>
+        <tr>
+
+            <th class="col-sm-2">
+                Patrick Wong
+            </th>
+            <td class="col-sm-3">
+                Graduate
+            </td>
+            <td class="col-sm-7">
+                <a href="/Admin/ScheduledCourseList">Remove</a>
+            </td>
+        </tr>
+
+    </table>
+
+</p>
+
+
+
+<form class="form-horizontal">
+    <label class="caption">Students</label>
+    <p>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="student_id">Student ID</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="student_id" placeholder="Please type a student id">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="name">Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" placeholder="Please type a student name">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="email">Email</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="email" placeholder="Please type a student email">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-default">Filter students</button>
+
+    </p>
+</form>
+<form class="form-horizontal">
+
+    <p>
+
+        <table class="table" id="students">
+            <tr>
+                <th>
+                    Student ID
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Grade
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    A000001
+                </td>
+                <td>
+                    John Doe
+                </td>
+                <td>
+                    xx1@ucsd.edu
+                </td>
+                <td class="col-sm-2">
+                    <select class="form-control" id="grade">
+                        <option value="ip" selected="selected">IP</option>
+                        <option value="A">A</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B">B</option>
+                        <option value="B-">B-</option>
+                        <option value="C+">C+</option>
+                        <option value="C">C</option>
+                        <option value="C-">C-</option>
+                        <option value="D">D</option>
+                        <option value="F">F</option>
+                    </select>
+                </td>
+           
+
+            </tr>
+        </table>
+
+        <button type="submit" class="btn btn-default">Save grades</button>
+
+    </p>
+</form>

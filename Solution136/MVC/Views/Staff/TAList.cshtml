@@ -1,28 +1,78 @@
 ﻿@{
-    ViewBag.Title = "TAList";
+    ViewBag.Title = "Browse TAs";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!-- Add link for adding ta to scheduled course, creating TA, editing TA-->
+<ol class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/Admin?id=1">Admin</a></li>
+    <li class="active">Browse TAs
+    <li>
+</ol>
 
-<h3>TA List Page</h3>
+<h3>Browse TAs</h3>
+<br />
+<form class="form-horizontal">
+    <p>
 
-<div id="TAListContent">
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>First</th>
-                <th>Last</th>
-                <th>Tutor Type</th>
-            </tr>
-            <!--Need to add 'Add'/'Remove' for TAs.-->
-            <tr>
-                <th>10001</th>
-                <th>Steven</th>
-                <th>Okai</th>
-                <th>Tutor</th>
-            </tr>
-        </thead>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="name">Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" placeholder="Please type name">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="type">Type</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="level">
+                    <option value="all" selected="selected">All</option>
+
+                    <option value="lower">Lower</option>
+                    <option value="upper">Upper</option>
+                    <option value="grad">Graduate</option>
+                </select>
+            </div>
+        </div>
+
+
+
+        <button type="submit" class="btn btn-default">Filter TAs</button>
+
+    </p>
+</form>
+
+<p>
+    <table class="table" id="tas">
+        <tr>
+            <th>
+                Name
+            </th>
+
+            <th>
+                Type
+            </th>
+
+
+        </tr>
+        <tr>
+            <td>
+                Patrick Wong
+            </td>
+            <td>
+                Upper
+            </td>
+
+            <td>
+                <a href="/Admin/TADetails?id=10">View details</a>
+            </td>
+            <td>
+                <a href="/Admin/EditTA?id=10">Edit</a>
+            </td>
+
+        </tr>
     </table>
-</div>
+</p>
+
+

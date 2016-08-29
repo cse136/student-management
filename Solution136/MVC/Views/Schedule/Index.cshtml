@@ -1,90 +1,360 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Browse Course Schedule";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h3>Schedule of classes</h3>
+<ol class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/Admin?id=1">Admin</a></li>
+    <li class="active">Browse Course Schedule</li>
+</ol>
+
+<h3>Browse Course Schedule</h3>
+<br />
+<form class="form-horizontal">
+    <p>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="year">Year</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="year">
+                    <option value="all">All</option>
+                    <option value="2016" selected="selected">2016</option>
+                    <option value="2015">2015</option>
+                    <option value="2014">2014</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="quarter">Quarter</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="quarter">
+                    <option value="all">All</option>
+                    <option value="Fall">Fall</option>
+                    <option value="Winter">Winter</option>
+                    <option value="Spring">Spring</option>
+                    <option value="Summer 1">Summer 1</option>
+                    <option value="Summer 2" selected="selected">Summer 2</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="course">Course</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="course" placeholder="Please type a course">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="instructor">Instructor</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="instructor" placeholder="Please type an instructor">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="rating">Minimum Rating</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="rating" placeholder="Please type a rating from 1 to 10">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-default">Filter courses</button>
+
+    </p>
+</form>
 
 <p>
-    <input type="text" placeholder="Type a course name" id="course_name" />
+    <table class="table" id="scheduled_courses">
+        <tr>
+            <th>
+                Year
+            </th>
+            <th>
+                Quarter
+            </th>
+            <th>
+                Course
+            </th>
+            <th>
+                Section
+            </th>
+            <th>
+                Title
+            </th>
+            <th>
+                Days
+            </th>
+            <th>
+                Times
+            </th>
+            <th>
+                Classroom
+            </th>
+            <th>
+                Instructor
+            </th>
+            <th>
+                Average Rating
+            </th>
 
-    <select id="year">
-        <option value="2016" selected="selected">2016</option>
-        <option value="2015">2015</option>
-        <option value="2014">2014</option>
-    </select>
+        </tr>
+        <tr>
+            <td>
+                2016
+            </td>
+            <td>
+                Summer 2
+            </td>
+            <td>
+                CSE 100
+            </td>
+            <td>
+                A00
+            </td>
+            <td>
+                Advanced Data Structures
+            </td>
+            <td>
+                Mon-Thu
+            </td>
+            <td>
+                4:00pm-5:30pm
+            </td>
+            <td>
+                WLH 2005
+            </td>
+            <td>
+                Cao, Yingjun
+            </td>
+            <td>
+                N/A
+            </td>
 
-    <select id="quarter">
-        <option  value="Fall">Fall</option>
-        <option  value="Winter">Winter</option>
-        <option  value="Spring">Spring</option>
-        <option  value="Summer 1">Summer 1</option>
-        <option  value="Summer 2" selected="selected">Summer 2</option>
-    </select>
+            <!-- If the user is an admin, show the link for adding a TA, editing scheduled course. Viewing list of enrollments.
+            Otherwise the link for enrolling (dropping if already enrolled) -->
+            <td>
+                <a href="/Admin/AddTAToScheduledCourse?id=20">Add a TA</a>
+            </td>
+            <td>
+                <a href="/Admin/ScheduledCourseStudentList">View details</a>
+            </td>
+            <td>
+                <a href="/Admin/EditScheduledCourse?id=20">Edit</a>
+            </td>
+        </tr>
 
-    <input type="button" value="Filter" id="filter">
 
-    <!-- If user is an admin, show links to create scheduled course -->
+        <tr>
+            <td>
+                2016
+            </td>
+            <td>
+                Summer 2
+            </td>
+            <td>
+                CSE 100
+            </td>
+            <td>
+                A00
+            </td>
+            <td>
+                Advanced Data Structures
+            </td>
+            <td>
+                Mon-Thu
+            </td>
+            <td>
+                4:00pm-5:30pm
+            </td>
+            <td>
+                WLH 2005
+            </td>
+            <td>
+                Cao, Yingjun
+            </td>
+            <td>
+                N/A
+            </td>
+
+
+            <td>
+                <a href="/Admin/StudentDetails?id=10">Enroll</a>
+            </td>
+
+        </tr>
+
+
+
+
+
+
+        <tr>
+            <td>
+                2016
+            </td>
+            <td>
+                Summer 2
+            </td>
+            <td>
+                CSE 100
+            </td>
+            <td>
+                A00
+            </td>
+            <td>
+                Advanced Data Structures
+            </td>
+            <td>
+                Mon-Thu
+            </td>
+            <td>
+                4:00pm-5:30pm
+            </td>
+            <td>
+                WLH 2005
+            </td>
+            <td>
+                Cao, Yingjun
+            </td>
+            <td>
+                N/A
+            </td>
+
+
+            <td>
+                <a href="/Admin/StudentDetails?id=10">Drop</a>
+            </td>
+
+        </tr>
+
+
+
+
+        <tr>
+            <td>
+                2016
+            </td>
+            <td>
+                Summer 2
+            </td>
+            <td>
+                CSE 100
+            </td>
+            <td>
+                A00
+            </td>
+            <td>
+                Advanced Data Structures
+            </td>
+            <td>
+                Mon-Thu
+            </td>
+            <td>
+                4:00pm-5:30pm
+            </td>
+            <td>
+                WLH 2005
+            </td>
+            <td>
+                Cao, Yingjun
+            </td>
+            <td>
+                N/A
+            </td>
+
+
+            <td>
+                <a href="/Admin/AddTutorToScheduledCourse?id=10">Tutor</a>
+            </td>
+
+        </tr>
+
+
+
+        <tr>
+            <td>
+                2016
+            </td>
+            <td>
+                Summer 2
+            </td>
+            <td>
+                CSE 100
+            </td>
+            <td>
+                A00
+            </td>
+            <td>
+                Advanced Data Structures
+            </td>
+            <td>
+                Mon-Thu
+            </td>
+            <td>
+                4:00pm-5:30pm
+            </td>
+            <td>
+                WLH 2005
+            </td>
+            <td>
+                Cao, Yingjun
+            </td>
+            <td>
+                N/A
+            </td>
+
+
+            <td>
+                <a href="/Admin/StudentDetails?id=10">Stop tutoring</a>
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                2016
+            </td>
+            <td>
+                Summer 2
+            </td>
+            <td>
+                CSE 100
+            </td>
+            <td>
+                A00
+            </td>
+            <td>
+                Advanced Data Structures
+            </td>
+            <td>
+                Mon-Thu
+            </td>
+            <td>
+                4:00pm-5:30pm
+            </td>
+            <td>
+                WLH 2005
+            </td>
+            <td>
+                Cao, Yingjun
+            </td>
+            <td>
+                9.5/10
+            </td>
+
+
+            <td>
+                <a href="/Student/CreateReview?id=10">Add review</a>
+            </td>
+
+        </tr>
+
+
+
+    </table>
 </p>
 
-<table id="scheduled_courses">
-    <tr>
-        <th>
-            Year
-        </th>
-        <th>
-            Quarter
-        </th>
-        <th>
-            Course
-        </th>
-        <th>
-            Title
-        </th>
-        <th>
-            Days
-        </th>
-        <th>
-            Times
-        </th>
-        <th>
-            Classroom
-        </th>
-        <th>
-            Instructor
-        </th>
-        <th>
-            <!-- If the user is an admin, show the link for adding a TA, editing scheduled course. Viewing list of enrollments.
-                 Otherwise the link for enrolling (dropping if already enrolled) -->
-        </th>
-        <th>
-            <!-- Enroll as a tutor link (drop as tutor) -->
-        </th>
-    </tr>
-    <tr>
-        <td>
-            2016
-        </td>
-        <td>
-            Summer 2
-        </td>
-        <td>
-            CSE 100
-        </td>
-        <td>
-            Advanced Data Structures
-        </td>
-        <td>
-            Mon-Thu
-        </td>
-        <td>
-            4:00pm-5:30pm
-        </td>
-        <td>
-            WLH 2005
-        </td>
-        <td>
-            Cao, Yingjun
-        </td>
-    </tr>
-</table>
+

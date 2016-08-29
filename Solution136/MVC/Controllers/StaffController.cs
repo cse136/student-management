@@ -5,7 +5,38 @@
 
     public class StaffController : Controller
     {
-        public ActionResult Index()
+        public ActionResult AddTAToScheduledCourse()
+        {
+            return this.View();
+        }     
+
+        public ActionResult CreateScheduledCourse()
+        {
+            return this.View();
+        }
+
+        public ActionResult CreateStudent()
+        {
+            return this.View();
+        }
+
+        public ActionResult CreateTA()
+        {
+            return this.View();
+        }
+
+        public ActionResult EditScheduledCourse(string id)
+        {
+            return this.View();
+        }
+
+
+        public ActionResult EditTA(string id)
+        {
+            return this.View();
+        }
+
+        public ActionResult InstructorList()
         {
             return this.View();
         }
@@ -15,19 +46,12 @@
             return this.View();
         }
 
+        public ActionResult TADetails()
+        {
+            return this.View();
+        }
+
         public ActionResult TAList()
-        {
-            return this.View();
-        }
-
-        public ActionResult AddTAToCourse()
-        {
-            return this.View();
-        }
-
-
-        [CustomAuthorizeAttribute(RoleList = new string[] { "admin" })]
-        public ActionResult CreateTA()
         {
             return this.View();
         }

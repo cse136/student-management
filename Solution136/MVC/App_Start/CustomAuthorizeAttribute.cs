@@ -7,21 +7,22 @@ using System.Web.Mvc;
 
 namespace MVC.App_Start
 {
-    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
     public class CustomAuthorizeAttribute : AuthorizeAttribute
     {
         public string[] RoleList { get; set; }
 
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            if (httpContext == null)
+            bool authorized = false;
+
+            if (httpContext != null && RoleList != null)
             {
-                throw new ArgumentNullException("httpContext");
+                object role = httpContext.Session["role"];
+                authorized =  RoleList.Contains(role.ToString());
             }
 
-            return RoleList.Length > 0 &&
-                RoleList.Contains(httpContext.Session["role"].ToString());
-           
+            return authorized;
         }
 
     }

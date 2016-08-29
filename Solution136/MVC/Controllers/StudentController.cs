@@ -4,9 +4,13 @@
 
     public class StudentController : Controller
     {
-        public ActionResult Index(string id)
+        public ActionResult AddTutorToScheduledCourse()
         {
-            ViewBag.Id = id;
+            return this.View();
+        }
+
+        public ActionResult CreateReview()
+        {
             return this.View();
         }
 
@@ -16,30 +20,9 @@
             return this.View();
         }
 
-        // Probably do it with one click from the schedule page :)
-        public ActionResult EnrollToCourse()
+        public ActionResult Index()
         {
             return this.View();
-        }
-
-        public ActionResult EnrollAsTutor()
-        {
-            return this.View();
-        }
-        public ActionResult DropTutoredCourse()
-        {
-            return this.View();
-        }
-
-        // Probably do it with one click from the schedule page :)
-        public ActionResult DropCourse()
-        {
-            return this.View();
-        }
-
-        public ActionResult CreateReview()
-        {
-            return this.View();
-        }
+        }   
     }
 }

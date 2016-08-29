@@ -4,14 +4,29 @@
 
     public class ScheduleController : Controller
     {
-        public ActionResult Index()
+        public ActionResult CourseDetails()
         {
-            return this.View("Index");
+            return this.View();
         }
 
-        public ActionResult ViewCourseReviews()
+        public ActionResult CourseList()
         {
-            return View();
+            return this.View();
+        }
+
+        public ActionResult Index()
+        {
+            return this.View();
+        }
+
+        public ActionResult ScheduledCourseReviews()
+        {
+            return this.View();
+        }
+
+        public ActionResult ScheduledCourseStudentList()
+        {
+            return this.View();
         }
     }
 }

@@ -10,12 +10,12 @@
     <li>
 </ol>
 
-<h3>Browse TAs</h3>
+<div class="col-lg-offset-1">
+    <h3>Browse TAs</h3>
+</div>
 <br />
 <form class="form-horizontal">
     <p>
-
-
         <div class="form-group">
             <label class="col-sm-2 control-label" for="name">Name</label>
             <div class="col-sm-10">
@@ -44,7 +44,7 @@
 </form>
 
 <p>
-    <table class="table" id="tas">
+    <table class="table" id="TAs">
         <tr>
             <th>
                 Name
@@ -53,26 +53,30 @@
             <th>
                 Type
             </th>
-
-
+            <th>
+                Details
+            </th>
+            <th></th>
         </tr>
-        <tr>
-            <td>
-                Patrick Wong
-            </td>
-            <td>
-                Upper
-            </td>
 
-            <td>
-                <a href="/Admin/TADetails?id=10">View details</a>
-            </td>
-            <td>
-                <a href="/Admin/EditTA?id=10">Edit</a>
-            </td>
-
-        </tr>
+        <tbody data-bind="foreach: viewModel">
+            <tr>
+                <td data-bind="text: name"></td>
+                <td data-bind="text: type"></td>
+                <td>
+                    <a href="/Admin/TADetails?id=10">View</a>
+                </td>
+                <td>
+                    <a href="/Admin/EditTA?id=10">Edit</a>
+                </td>
+            </tr>
+        </tbody>
     </table>
 </p>
 
-
+<script type="text/javascript">
+    $(document).ready(function () {
+        var studentViewModelObj = new StudentViewModel();
+        studentViewModelObj.GetAll();
+    })
+</script>

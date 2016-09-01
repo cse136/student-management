@@ -1,21 +1,26 @@
-﻿function StudentModel(asyncIndicator) {
-
+﻿//// THe reason for asyncIndicator is to make sure Jasmine test cases can run without error
+//// Due to async nature of ajax, the Jasmine's compare function would throw an error during
+//// a callback. By allowing this optional paramter for TAModel function, it forces the ajax
+//// call to be synchronous when running the Jasmine tests.  However, the viewModel will not pass
+//// this parameter so the asynncIndicator would be undefined which is set to "true". Ajax would
+//// be async when called by viewModel.
+function TAModel(asyncIndicator) {
     if (asyncIndicator == undefined) {
         asyncIndicator = true;
     }
 
-    this.Create = function (student, callback) {
+    this.Create = function (ta, callback) {
         $.ajax({
             async: asyncIndicator,
             method: "POST",
-            url: "http://localhost:9393/Api/Student/InsertStudent",
-            data: student,
+            url: "http://localhost:9393/Api/Staff/InsertTA",
+            data: ta,
             dataType: "json",
             success: function (result) {
                 callback(result);
             },
             error: function () {
-                alert('Error while adding student.  Is your service layer running?');
+                alert('Error while adding ta.  Is your service layer running?');
             }
         });
     };
@@ -24,14 +29,14 @@
         $.ajax({
             async: asyncIndicator,
             method: "POST",
-            url: "http://localhost:9393/Api/Student/DeleteStudent?id=" + id,
+            url: "http://localhost:9393/Api/Staff/DeleteTA?id=" + id,
             data: '',
             dataType: "json",
             success: function (result) {
                 callback(result);
             },
             error: function () {
-                alert('Error while deleteing student.  Is your service layer running?');
+                alert('Error while deleteing ta.  Is your service layer running?');
             }
         });
     };
@@ -40,20 +45,20 @@
         $.ajax({
             async: asyncIndicator,
             method: "POST",
-            url: "http://localhost:9393/Api/Student/DeleteStudentAsync?id=" + id,
+            url: "http://localhost:9393/Api/Staff/DeleteTAAsync?id=" + id,
             data: '',
             dataType: "json",
             success: function (result) {
                 callback(result);
             },
             error: function () {
-                alert('Error while deleteing student.  Is your service layer running?');
+                alert('Error while deleteing ta.  Is your service layer running?');
             }
         });
     };
 
     this.GetAll = function (callback) {
-        var url = "http://localhost:9393/Api/Student/GetStudentList?bust=" + new Date();
+        var url = "http://localhost:9393/Api/Staff/TAList?bust=" + new Date();
         $.ajax({
             async: asyncIndicator,
             method: "GET",
@@ -64,13 +69,13 @@
                 callback(result);
             },
             error: function () {
-                alert('Error while loading student list.  Is your service layer running?');
+                alert('Error while loading ta list.  Is your service layer running?');
             }
         });
     };
 
-    this.GetDetail = function (id, callback) {
-        var url = "http://localhost:9393/Api/Student/GetStudent?id=" + id + "&bust=" + new Date();
+    this.GetDetails = function (id, callback) {
+        var url = "http://localhost:9393/Api/Staff/TADetails?id=" + id + "&bust=" + new Date();
             
         $.ajax({
             async: asyncIndicator,
@@ -82,21 +87,7 @@
                 callback(result);
             },
             error: function () {
-                alert('Error while loading student detail.  Is your service layer running?');
-            }
-        });
-    };
-
-    this.Load = function (id, first, last, email, gpa, callback) {
-        $.ajax({
-            url: "http://localhost:9393/Api/Student/GetStudentList?id=" + id + "&first=" + first + "&last=" + last + "&email=" + email + "&gpa=" + gpa,
-            data: "",
-            dataType: "json",
-            success: function (studentData) {
-                callback(studentData);
-            },
-            error: function () {
-                alert('Error while loading student list.  Is your service layer running?');
+                alert('Error while loading ta detail.  Is your service layer running?');
             }
         });
     };

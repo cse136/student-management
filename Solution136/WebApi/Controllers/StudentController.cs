@@ -9,12 +9,12 @@
     public class StudentController : ApiController
     {
         [HttpGet]
-        public List<student> GetStudentList()
+        public List<student> GetStudentList(string id = null, string first = null, string last = null, string email = null, double gpa = 0)
         {
             var errors = new List<string>();
             var repository = new StudentRepository();
             var service = new StudentService(repository);
-            return service.GetStudentList(ref errors);
+            return service.GetStudentList(ref errors, id, first, last, email, gpa);
         }
 
         [HttpGet]

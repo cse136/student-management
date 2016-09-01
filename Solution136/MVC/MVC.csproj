@@ -140,11 +140,13 @@
     <Content Include="Scripts\136Libraries\Models\CourseModel.js" />
     <Content Include="Scripts\136Libraries\Models\LoginModel.js" />
     <Content Include="Scripts\136Libraries\Models\StudentModel.js" />
+    <Content Include="Scripts\136Libraries\Models\TAModel.js" />
     <Content Include="Scripts\136Libraries\ViewModels\AdminViewModel.js" />
     <Content Include="Scripts\136Libraries\ViewModels\InstructorViewModel.js" />
     <Content Include="Scripts\136Libraries\ViewModels\CourseViewModel.js" />
     <Content Include="Scripts\136Libraries\ViewModels\LoginViewModel.js" />
     <Content Include="Scripts\136Libraries\ViewModels\StudentViewModel.js" />
+    <Content Include="Scripts\136Libraries\ViewModels\TAViewModel.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Jasmine\lib\jasmine-2.0.0\boot.js" />

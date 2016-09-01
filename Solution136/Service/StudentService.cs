@@ -76,9 +76,9 @@
             this.repository.DeleteStudent(id, ref errors);
         }
 
-        public List<student> GetStudentList(ref List<string> errors)
+        public List<student> GetStudentList(ref List<string> errors, string id = null, string first = null, string last = null, string email = null, double gpa = 0)
         {
-            return this.repository.GetStudentList(ref errors);
+            return this.repository.GetStudentList(ref errors, id, first, last, email, gpa);
         }
 
         public void EnrollSchedule(string studentId, int scheduleId, ref List<string> errors)

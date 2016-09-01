@@ -1,10 +1,26 @@
 ﻿@{
+    string userType = null;
+
+    switch (Session["role"].ToString())
+    {
+        case "staff":
+            userType = "Staff";
+            break;
+        case "admin":
+            userType = "Admin";
+            break;
+        default:
+            userType = "Student";
+            break;
+    }
+
+    ViewBag.UserType = userType;
+
     ViewBag.Title = "Browse Instructors";
 }
 
 <ol class="breadcrumb">
     <li><a href="/">Home</a></li>
-    <li><a href="/Admin?id=1">Admin</a></li>
     <li class="active">Browse Instructors</li>
 </ol>
 
@@ -16,26 +32,26 @@
         <div class="form-group">
             <label class="col-sm-2 control-label" for="title">Title</label>
             <div class="col-sm-10">
-                <select class="form-control" id="title">
-                    <option value="all" selected="selected">All</option>
-                    <option value="Adjunct Faculty">Adjunct Faculty</option>
-                </select>
+                <select data-bind="options: viewModel.availableTitles,
+                                       optionsText: 'displayName',
+                                       value: viewModel.selectedTitle" class="form-control" id="title"></select>
+
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-sm-2 control-label" for="name">Name</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="name" placeholder="Please type an instructor name">
+                <input data-bind="value: viewModel.name_filter" type="text" class="form-control" id="name" placeholder="Please type an instructor name">
             </div>
         </div>
 
-        <button type="submit" class="btn btn-default">Filter instructors</button>
+        <button type="submit" data-bind="click: viewModel.filter" class=" btn btn-default">Filter instructors</button>
     </p>
 </form>
 
 <p>
-    <table class="table" id="scheduled_courses">
+    <table class="table">
         <tr>
             <th>
                 Name
@@ -43,20 +59,26 @@
             <th>
                 Title
             </th>
+            <th />
+            @if (ViewBag.UserType == "Admin")
+            {
+                <th />
+            }
         </tr>
-        <tr>
-            <td>
-                Isaac Chu
-            </td>
-            <td>
-                Adjunt Faculty
-            </td>
-            <td>
-                <a href="/Admin/ScheduledCourseList?instructor=1">View scheduled courses</a>
-            </td>
-            <td>
-                <a href="/Admin/EditInstructor?id=1">Edit</a>
+        <tbody data-bind="foreach: viewModel.courseList">
+            <tr>
+                <td data-bind="text: name" />
+                <td data-bind="text: title" />
+
+                <td>
+                    <a data-bind="attr: {'href': '/Schedule/Index?instructor='+ id}">View scheduled courses</a>
+                </td>
+                <td>
+                    @if (ViewBag.UserType == "Admin")
+                    {
+                        <a data-bind="attr: {'href': '/Admin/EditInstructor='+ id}">Edit</a>
+                    }
             </td>
         </tr>
-    </table>
+</table>
 </p>

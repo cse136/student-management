@@ -146,10 +146,9 @@
 
             try
             {
-                var result_course = context.courses.SingleOrDefault(c =>
-                                    c.course_id == course_id);
-
-                list = result_course.courses.ToList();
+                list = (List<course>)context.courses.Include("course1").Where(c =>
+                                    c.course_id == course_id).Select(c=> c.course1).FirstOrDefault().ToList();
+               
             }
             catch (Exception e)
             {
@@ -195,5 +194,100 @@
 
             return courseList;
         }
+
+
+        public course GetCourseDetail(int id, ref List<string> errors)
+        {
+            var course = new course();
+            cse136Entities context = new cse136Entities();
+
+            try
+            {
+                course = context.courses.SingleOrDefault(c => c.course_id == id);
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+            finally
+            {
+                context.Dispose();
+            }
+
+            return course;
+        }
+
+
+        public void RemovePrereq(int id, int prereq, ref List<string> errors)
+        {
+            var context = new cse136Entities();
+
+            try
+            {
+                var course = context.courses.Include("course1").Where(c =>
+                                    c.course_id == id).FirstOrDefault();
+
+                if (course != null)
+                {
+                    var prereqCourse = course.course1.Where(c => c.course_id == prereq).FirstOrDefault();
+
+                    if (prereqCourse != null)
+                    {
+                        course.course1.Remove(prereqCourse);
+                        context.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+            finally
+            {
+                context.Dispose();
+            }
+        }
+
+
+        public void AddPrereq(int id, int prereq, ref List<string> errors)
+        {
+            var context = new cse136Entities();
+
+            try
+            {
+                var course = context.courses.Include("course1").Where(c =>
+                                    c.course_id == id).FirstOrDefault();
+
+                if (course != null)
+                {
+                    var prereqCourse = course.course1.Where(c => c.course_id == prereq).FirstOrDefault();
+
+                    if (prereqCourse != null)
+                    {
+                        throw new Exception("Can't add duplicate pre-requisites");
+
+                    } else if (id == prereq) {
+
+                        throw new Exception("Can't add same course as pre-requisite");
+                    }
+                    else
+                    {
+                        prereqCourse = new course() { course_id = prereq };
+                        context.courses.Attach(prereqCourse);
+                        course.course1.Add(prereqCourse);
+                        context.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+            finally
+            {
+                context.Dispose();
+            }
+        }
+
     }
 }

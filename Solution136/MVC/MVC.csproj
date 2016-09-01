@@ -136,11 +136,13 @@
     <Content Include="Content\Site.css" />
     <Content Include="Icon.png" />
     <Content Include="Scripts\136Libraries\Models\AdminModel.js" />
-    <Content Include="Scripts\136Libraries\Models\CourseListModel.js" />
+    <Content Include="Scripts\136Libraries\Models\InstructorModel.js" />
+    <Content Include="Scripts\136Libraries\Models\CourseModel.js" />
     <Content Include="Scripts\136Libraries\Models\LoginModel.js" />
     <Content Include="Scripts\136Libraries\Models\StudentModel.js" />
     <Content Include="Scripts\136Libraries\ViewModels\AdminViewModel.js" />
-    <Content Include="Scripts\136Libraries\ViewModels\CourseListViewModel.js" />
+    <Content Include="Scripts\136Libraries\ViewModels\InstructorViewModel.js" />
+    <Content Include="Scripts\136Libraries\ViewModels\CourseViewModel.js" />
     <Content Include="Scripts\136Libraries\ViewModels\LoginViewModel.js" />
     <Content Include="Scripts\136Libraries\ViewModels\StudentViewModel.js" />
     <Content Include="Scripts\bootstrap.js" />

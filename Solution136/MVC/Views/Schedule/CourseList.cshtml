@@ -16,11 +16,11 @@
 
     ViewBag.UserType = userType;
 
-    
+
     ViewBag.Title = "Browse Courses";
 }
 
-<div id="course_list">
+<div id="courseViewModel">
 
     <ol class="breadcrumb">
         <li><a href="/">Home</a></li>
@@ -43,7 +43,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="course">Course</label>
                 <div class="col-sm-10">
-                    <input data-bind="value: viewModel.course" type="text" class="form-control" id="course" placeholder="Please type a course">
+                    <input data-bind="value: viewModel.course_filter" type="text" class="form-control" id="course" placeholder="Please type a course">
                 </div>
             </div>
             <button type="submit" data-bind="click: viewModel.filter" class=" btn btn-default">Filter courses</button>
@@ -62,8 +62,11 @@
                 <th>
                     Level
                 </th>
-                <th/>
                 <th />
+                @if (ViewBag.UserType == "Admin")
+                {
+                    <th />
+                }
             </tr>
             <tbody data-bind="foreach: viewModel.courseList">
                 <tr>
@@ -72,7 +75,7 @@
                     <td data-bind="text: level" />
 
                     <td>
-                        <a data-bind="attr: {'href': '/Schedule/CourseDetails?id=' + id}">View pre-requisites</a>
+                        <a data-bind="attr: {'href': '/Schedule/CourseDetails?id=' + id}">Pre-requisites</a>
                     </td>
 
                     @if (ViewBag.UserType == "Admin")
@@ -90,8 +93,9 @@
 
     $(document).ready(function () {
 
-        var courseListViewModelObj =
-            new CourseListViewModel();
-        courseListViewModelObj.Initialize();
+        var courseViewModelObj =
+            new CourseViewModel();
+        courseViewModelObj.Initialize();
+        courseViewModelObj.courseViewModel.filter();
     });
 </script>

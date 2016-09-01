@@ -6,8 +6,9 @@
     [CustomAuthorizeAttribute(RoleList = new string[] { "admin" })]
     public class AdminController : Controller
     {
-        public ActionResult AddCoursePrereq()
+        public ActionResult AddCoursePrereq(int id)
         {
+            ViewBag.id = id;
             return this.View();
         }
 
@@ -21,8 +22,10 @@
             return this.View();
         }
 
-        public ActionResult EditCourse()
+        public ActionResult EditCourse(int id)
         {
+            ViewBag.id = id;
+
             return this.View();
         }
 

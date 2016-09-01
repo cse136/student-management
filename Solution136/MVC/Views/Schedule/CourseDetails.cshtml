@@ -1,23 +1,43 @@
-﻿
-@{
+﻿@{
+
+    string userType = null;
+
+    switch (Session["role"].ToString())
+    {
+        case "staff":
+            userType = "Staff";
+            break;
+        case "admin":
+            userType = "Admin";
+            break;
+        default:
+            userType = "Student";
+            break;
+    }
+
+    ViewBag.UserType = userType;
+
+
     ViewBag.Title = "Course Pre-requisites";
 }
 
 <ol class="breadcrumb">
     <li><a href="/">Home</a></li>
-    <li><a href="/Admin?id=1">Admin</a></li>
-    <li><a href="/Admin/CourseList">Browse Courses</a></li>
+    <li><a href="/Schedule/CourseList">Browse Courses</a></li>
     <li class="active">Course Pre-requisites</li>
 </ol>
 
-<h3>CSE 110 Pre-requisites</h3>
+<h3 data-bind="text: viewModel.course_title() + ' Pre-requisistes'"></h3>
 <br />
 
 <p>
-    <a href="/Admin/AddCoursePrereq?id=25">New pre-requisite</a>
+    @if (ViewBag.UserType == "Admin")
+    {
+        <a href="/Admin/AddCoursePrereq?id=@ViewBag.id">New pre-requisite</a>
+    }
 </p>
 <p>
-    <table class="table" id="scheduled_courses">
+    <table class="table" id="course">
         <tr>
             <th>
                 Course
@@ -25,29 +45,33 @@
             <th>
                 Title
             </th>
+            <th>
+                Level
+            </th>
+            <th />
         </tr>
-        <tr>
-            <td>
-                CSE 21
-            </td>
-            <td>
-                Mathematics for Algorithms and Systems
-            </td>
-            <td>
-                <a href="/Admin/CourseList">Remove</a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                CSE 100
-            </td>
-            <td>
-                Advanced Data Structures
-            </td>
-            <td>
-                <a href="/Admin/CourseList">Remove</a>
-            </td>
-        </tr>
+        <tbody data-bind="foreach: viewModel.prereqs">
+            <tr>
+                <td data-bind="text: title" />
+                <td data-bind="text: description" />
+                <td data-bind="text: level" />
+
+                @if (ViewBag.UserType == "Admin")
+                {
+                    <td>
+                        <a data-bind="click: $parent.viewModel.removePrereq.bind($data, @ViewBag.id)">Remove</a>
+                    </td>
+                }
+            </tr>
     </table>
 </p>
+<script type="text/javascript">
 
+    $(document).ready(function () {
+
+        var courseViewModelObj =
+            new CourseViewModel();
+        courseViewModelObj.Initialize();
+        courseViewModelObj.courseViewModel.getDetail(@ViewBag.id);
+    });
+</script>

@@ -65,6 +65,7 @@
       <DependentUpon>CSE136Model.tt</DependentUpon>
     </Compile>
     <Compile Include="CourseLevel.cs" />
+    <Compile Include="course_extended.cs" />
     <Compile Include="course_review.cs">
       <DependentUpon>CSE136Model.tt</DependentUpon>
     </Compile>

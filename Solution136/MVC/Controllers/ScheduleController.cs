@@ -6,8 +6,9 @@
     [CustomAuthorizeAttribute(RoleList = new string[] { "student", "admin", "staff" })]
     public class ScheduleController : Controller
     {
-        public ActionResult CourseDetails()
+        public ActionResult CourseDetails(string id)
         {
+            ViewBag.id = id;
             return this.View();
         }
 

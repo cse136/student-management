@@ -1,37 +1,53 @@
 ﻿@{
-    ViewBag.Title = "New Pre-requisite";
+
+    string userType = null;
+
+    switch (Session["role"].ToString())
+    {
+        case "staff":
+            userType = "Staff";
+            break;
+        case "admin":
+            userType = "Admin";
+            break;
+        default:
+            userType = "Student";
+            break;
+    }
+
+    ViewBag.UserType = userType;
+
+
+    ViewBag.Title = "Course Pre-requisites";
 }
 
 <ol class="breadcrumb">
     <li><a href="/">Home</a></li>
-    <li><a href="/Admin?id=1">Admin</a></li>
-    <li><a href="/Admin/CourseList">Browse Courses</a></li>
-    <li><a href="/Admin/CourseDetails?id=25">Course Pre-requisites</a></li>
+    <li><a href="/Schedule/CourseList">Browse Courses</a></li>
+    <li><a href="/Schedule/CourseDetails?id=@ViewBag.id">Course Pre-requisites</a></li>
     <li class="active">New Pre-requisite</li>
 </ol>
 
-<h3>CSE 110 New Pre-requisite</h3>
+<h3 data-bind="text: viewModel.course() + ' New pre-requisiste'"></h3>
 <br />
 <form class="form-horizontal">
     <p>
         <div class="form-group">
             <label class="col-sm-2 control-label" for="level">Course Level</label>
             <div class="col-sm-10">
-                <select class="form-control" id="level">
-                    <option value="all" selected="selected">All</option>
-                    <option value="lower">Lower</option>
-                    <option value="upper">Upper</option>
-                    <option value="grad">Graduate</option>
-                </select>
+                <select data-bind="options: viewModel.availableLevels,
+                                       optionsText: 'displayName',
+                                       value: viewModel.selectedLevel" class="form-control" id="level"></select>
+
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label" for="course">Course</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="course" placeholder="Please type a course">
+                <input data-bind="value: viewModel.course_filter" type="text" class="form-control" id="course" placeholder="Please type a course">
             </div>
         </div>
-        <button type="submit" class="btn btn-default">Filter courses</button>
+        <button type="submit" data-bind="click: viewModel.filter" class=" btn btn-default">Filter courses</button>
     </p>
 </form>
 
@@ -45,28 +61,37 @@
             <th>
                 Title
             </th>
+            <th>
+                Level
+            </th>
+            <th>
+            </th>
         </tr>
-        <tr>
-            <td>
-                CSE 110
-            </td>
-            <td>
-                Software Engineering
-            </td>
-            <td>
-                <a href="/Admin/CourseDetails?id=20">Add as pre-requisite</a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                CSE 100
-            </td>
-            <td>
-                Advanced Data Structures
-            </td>
-            <td>
-                <a href="/Admin/CourseDetails?id=20">Add as pre-requisite</a>
-            </td>
-        </tr>
+        <tbody data-bind="foreach: viewModel.courseList">
+            <tr>
+                <td data-bind="text: title" />
+                <td data-bind="text: description" />
+                <td data-bind="text: level" />
+
+                <td>
+                    <a data-bind="click: $parent.viewModel.addPrereq.bind($data, @ViewBag.id)">Add</a>
+                </td>
+            </tr>
+        </tbody>
+
     </table>
 </p>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        var courseViewModelObj =
+            new CourseViewModel();
+        courseViewModelObj.Initialize();
+        courseViewModelObj.courseViewModel.filter();
+        debugger;
+        courseViewModelObj.courseViewModel.getDetail(@ViewBag.id);
+
+    });
+</script>

@@ -1,0 +1,50 @@
+﻿@{
+    Layout = null;
+    
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Hogwarts School of Witchcraft and Wizardry", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @if (IsSectionDefined("CustomError"))
+        {
+            @RenderSection("CustomError")
+        }
+        else
+        {
+            <hgroup>
+                <h1>Error</h1>
+                <h3>Oops, there was a server error; that's why you don't trust in muggles to code your website!</h3>
+            </hgroup>
+        }
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Hogwarts School of Witchcraft and Wizardry</p>
+        </footer>
+    </div>
+</body>
+</html>

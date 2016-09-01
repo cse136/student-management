@@ -30,22 +30,11 @@
 
                     var jsonSerializer = new JavaScriptSerializer();
                     var logon = jsonSerializer.Deserialize<LogonResult>(responseFromServer);
-
+                    
                     this.Session["role"] = logon.Role;
                     this.Session["id"] = logon.Id;
 
-                    switch (logon.Role)
-                    {
-                        case "admin":
-                            this.Response.Redirect("/Admin?id=" + logon.Id);
-                            break;
-                        case "staff":
-                            this.Response.Redirect("/Staff?id=" + logon.Id);
-                            break;
-                        case "student":
-                            this.Response.Redirect("/Student?id=" + logon.Id);
-                            break;
-                    }
+                    this.Response.Redirect("/Home?id=" + logon.Id);
                 }
             }
 

@@ -9,13 +9,13 @@
     public class CourseController : ApiController
     {
         [HttpGet]
-        public List<course> GetCourseList()
+        public List<course> GetCourseList(string course = null, string level = null)
         {
             var service = new CourseService(new CourseRepository());
             var errors = new List<string>();
 
             //// we could log the errors here if there are any...
-            return service.GetCourseList(ref errors);
+            return service.GetCourseList(ref errors, course, level);
         }
 
         //// you can add more [HttpGet] and [HttpPost] methods as you need

@@ -20,6 +20,8 @@ namespace POCO
         public cse136Entities()
             : base("name=cse136Entities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

@@ -1,76 +1,97 @@
-﻿
-@{
+﻿@{
+    string userType = null;
+
+    switch (Session["role"].ToString())
+    {
+        case "staff":
+            userType = "Staff";
+            break;
+        case "admin":
+            userType = "Admin";
+            break;
+        default:
+            userType = "Student";
+            break;
+    }
+
+    ViewBag.UserType = userType;
+
+    
     ViewBag.Title = "Browse Courses";
 }
 
-<ol class="breadcrumb">
-    <li><a href="/">Home</a></li>
-    <li><a href="/Admin?id=1">Admin</a></li>
-    <li class="active">Browse Courses</li>
-</ol>
+<div id="course_list">
 
-<h3>Browse Courses</h3>
-<br />
-    <form class="form-horizontal">
+    <ol class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li class="active">Browse Courses</li>
+    </ol>
+
+    <h3>Browse Courses</h3>
+    <br />
+    <form class="form-horizontal" id="course_form">
         <p>
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="level">Course Level</label>
                 <div class="col-sm-10">
-                    <select class="form-control" id="level">
-                        <option value="all" selected="selected">All</option>
-                        <option value="lower">Lower</option>
-                        <option value="upper">Upper</option>
-                        <option value="grad">Graduate</option>
-                    </select>
+
+                    <select data-bind="options: viewModel.availableLevels,
+                                       optionsText: 'displayName',
+                                       value: viewModel.selectedLevel" class="form-control" id="level"></select>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="course">Course</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="course" placeholder="Please type a course">
+                    <input data-bind="value: viewModel.course" type="text" class="form-control" id="course" placeholder="Please type a course">
                 </div>
             </div>
-            <button type="submit" class="btn btn-default">Filter courses</button>
+            <button type="submit" data-bind="click: viewModel.filter" class=" btn btn-default">Filter courses</button>
         </p>
-</form>
+    </form>
 
-<p>
-    <table class="table" id="scheduled_courses">
-        <tr>
-            <th>
-                Course
-            </th>
-            <th>
-                Title
-            </th>
-        </tr>
-        <tr>
-            <td>
-                CSE 110
-            </td>
-            <td>
-                Software Engineering
-            </td>
-            <td>
-                <a href="/Admin/CourseDetails?id=20">View pre-requisites</a>
-            </td>
-            <td>
-                <a href="/Admin/EditCourse?id=20">Edit </a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                CSE 100
-            </td>
-            <td>
-                Advanced Data Structures
-            </td>
-            <td>
-                <a href="/Admin/CourseDetails?id=20">View pre-requisites</a>
-            </td>
-            <td>
-                <a href="/Admin/EditCourse?id=20">Edit</a>
-            </td>
-        </tr>
-    </table>
-</p>
+    <p>
+        <table class="table" id="course_table">
+            <tr>
+                <th>
+                    Course
+                </th>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Level
+                </th>
+                <th/>
+                <th />
+            </tr>
+            <tbody data-bind="foreach: viewModel.courseList">
+                <tr>
+                    <td data-bind="text: title" />
+                    <td data-bind="text: description" />
+                    <td data-bind="text: level" />
+
+                    <td>
+                        <a data-bind="attr: {'href': '/Schedule/CourseDetails?id=' + id}">View pre-requisites</a>
+                    </td>
+
+                    @if (ViewBag.UserType == "Admin")
+                    {
+                        <td>
+                            <a data-bind="attr: {'href': '/Admin/EditCourse?id=' + id}">Edit</a>
+                        </td>
+                    }
+                </tr>
+            </tbody>
+        </table>
+    </p>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        var courseListViewModelObj =
+            new CourseListViewModel();
+        courseListViewModelObj.Initialize();
+    });
+</script>

@@ -6,6 +6,6 @@
 
     public interface ICourseRepository
     {
-        List<course> GetCourseList(ref List<string> errors);
+        List<course> GetCourseList(ref List<string> errors, string course = null, string level = null);
     }
 }

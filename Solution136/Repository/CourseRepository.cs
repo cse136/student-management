@@ -14,53 +14,6 @@
     {
         private const string GetCourseListProcedure = "spGetCourseList";
 
-        public List<course> GetCourseList(ref List<string> errors)
-        {
-            var conn = new SqlConnection(ConnectionString);
-            var courseList = new List<course>();
-
-            try
-            {
-                var adapter = new SqlDataAdapter(GetCourseListProcedure, conn)
-                                  {
-                                      SelectCommand =
-                                          {
-                                              CommandType = CommandType.StoredProcedure
-                                          }
-                                  };
-
-                var dataSet = new DataSet();
-                adapter.Fill(dataSet);
-
-                if (dataSet.Tables[0].Rows.Count == 0)
-                {
-                    return null;
-                }
-
-                for (var i = 0; i < dataSet.Tables[0].Rows.Count; i++)
-                {
-                    var course = new course
-                                     {
-                                         course_id = (int)dataSet.Tables[0].Rows[i]["course_id"],
-                                         course_title = dataSet.Tables[0].Rows[i]["course_title"].ToString(),
-                                         course_level = dataSet.Tables[0].Rows[i]["course_level"].ToString(),
-                                         course_description = dataSet.Tables[0].Rows[i]["course_description"].ToString()
-                                     };
-                    courseList.Add(course);
-                }
-            }
-            catch (Exception e)
-            {
-                errors.Add("Error: " + e);
-            }
-            finally
-            {
-                conn.Dispose();
-            }
-
-            return courseList;
-        }
-
         public void InsertCourse(course course, ref List<string> errors)
         {
             var context = new cse136Entities();
@@ -208,6 +161,39 @@
             }
 
             return list;
+        }
+
+        public List<course> GetCourseList(ref List<string> errors, string course = null, string level = null)
+        {
+            var courseList = new List<course>();
+            cse136Entities context = new cse136Entities();
+
+            try
+            {
+                var query = context.courses.AsQueryable();
+
+                if (!string.IsNullOrEmpty(course))
+                {
+                    query = query.Where(c => c.course_title.Contains(course) || c.course_description.Contains(course));
+                }
+
+                if (!string.IsNullOrEmpty(level))
+                {
+                    query = query.Where(c => c.course_level == level);
+                }
+
+                courseList = query.ToList();
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+            finally
+            {
+                context.Dispose();
+            }
+
+            return courseList;
         }
     }
 }

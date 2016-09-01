@@ -61,6 +61,7 @@
     <Compile Include="Award\RankByInnovation.cs" />
     <Compile Include="Award\Resolver.cs" />
     <Compile Include="AuthorizeService.cs" />
+    <Compile Include="InstructorService.cs" />
     <Compile Include="CourseService.cs" />
     <Compile Include="ReviewService.cs" />
     <Compile Include="ScheduleService.cs" />

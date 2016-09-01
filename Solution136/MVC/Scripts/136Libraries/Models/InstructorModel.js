@@ -2,10 +2,11 @@
 
     this.Filter = function (instructor, title, callback) {
         $.ajax({
-            url: "http://localhost:9393/Api/Instructor/GetList?instructor=" + course + "&title=" + title,
+            url: "http://localhost:9393/Api/Instructor/GetList?instructor=" + instructor + "&title=" + title,
             data: "",
             dataType: "json",
             success: function (instructorData) {
+                debugger;
                 callback(instructorData);
             },
             error: function () {
@@ -28,6 +29,21 @@
             }
         });
     };
+
+    this.GetDetail = function (id, callback) {
+        $.ajax({
+            url: "http://localhost:9393/Api/Instructor/GetDetail?id=" + id,
+            data: "",
+            dataType: "json",
+            success: function (data) {
+                callback(data);
+            },
+            error: function () {
+                alert('Error while loading instructor. Is your service layer running?');
+            }
+        });
+    };
+
 
     this.Add = function (model, callback) {
         $.ajax({

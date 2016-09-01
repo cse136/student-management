@@ -29,8 +29,9 @@
             return this.View();
         }
 
-        public ActionResult EditInstructor()
+        public ActionResult EditInstructor(int id)
         {
+            ViewBag.id = id;
             return this.View();
         }
     }

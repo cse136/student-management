@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IInstructorRepository.cs" />
     <Compile Include="ICourseRepository.cs" />
     <Compile Include="IReviewRepository.cs" />
     <Compile Include="IScheduleRepository.cs" />

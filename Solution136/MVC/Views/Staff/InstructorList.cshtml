@@ -65,7 +65,7 @@
                 <th />
             }
         </tr>
-        <tbody data-bind="foreach: viewModel.courseList">
+        <tbody data-bind="foreach: viewModel.instructorList">
             <tr>
                 <td data-bind="text: name" />
                 <td data-bind="text: title" />
@@ -76,9 +76,20 @@
                 <td>
                     @if (ViewBag.UserType == "Admin")
                     {
-                        <a data-bind="attr: {'href': '/Admin/EditInstructor='+ id}">Edit</a>
+                        <a data-bind="attr: {'href': '/Admin/EditInstructor?id='+ id}">Edit</a>
                     }
             </td>
         </tr>
 </table>
 </p>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        var viewModelObj =
+            new InstructorViewModel();
+        viewModelObj.Initialize();
+        viewModelObj.instructorViewModel.filter();
+    });
+</script>

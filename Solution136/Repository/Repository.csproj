@@ -59,6 +59,7 @@
     <Compile Include="AuthorizeRepository.cs" />
     <Compile Include="BaseRepository.cs" />
     <Compile Include="ApplicationExceptionHandlerAspect.cs" />
+    <Compile Include="InstructorRepository.cs" />
     <Compile Include="CourseRepository.cs" />
     <Compile Include="CSE136Entities.Context.cs">
       <AutoGen>True</AutoGen>

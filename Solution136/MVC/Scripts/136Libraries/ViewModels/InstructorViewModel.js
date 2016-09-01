@@ -15,12 +15,11 @@
 
         self.instructorViewModel = {
 
-            course_description: ko.observable(''),
+            display_name: ko.observable(''),
 
-            course: ko.observable(''),
-            course_title: ko.observable(''),
+            //course: ko.observable(''),
+            //course_title: ko.observable(''),
 
-            prereqs: ko.observableArray(),
 
             availableTitles: ko.observableArray([
                 new Title('All', ''),
@@ -29,7 +28,7 @@
                 new Title('Research Associate Professor', 'Research Associate Professor'),
                 new Title('Research Professor', 'Research Professor'),
                 new Title('Adjunct Assistant Professor', 'Adjunct Assistant Professor'),
-                new Title('Adjunct Assistant Professor', 'Adjunct Faculty'),
+                new Title('Adjunct Faculty', 'Adjunct Faculty'),
 
                 new Title('Adjunct Associate Professor', 'Adjunct Associate Professor'),
                 new Title('Adjunct Professor', 'Adjunct Professor'),
@@ -38,7 +37,7 @@
                 new Title('Visiting Associate Professor', 'Visiting Associate Professor'),
                 new Title('Visiting Professor', 'Visiting Professor'),
                 new Title('Visiting Assistant Professor', 'Visiting Associate Professo'),
-                new Title('Visiting Professor', 'Visiting Professor'),
+                new Title('Visiting Professor', 'Visiting Professor')
 
 
             ]),
@@ -49,7 +48,7 @@
                 new Title('Research Associate Professor', 'Research Associate Professor'),
                 new Title('Research Professor', 'Research Professor'),
                 new Title('Adjunct Assistant Professor', 'Adjunct Assistant Professor'),
-                new Title('Adjunct Assistant Professor', 'Adjunct Faculty'),
+                new Title('Adjunct Faculty', 'Adjunct Faculty'),
 
                 new Title('Adjunct Associate Professor', 'Adjunct Associate Professor'),
                 new Title('Adjunct Professor', 'Adjunct Professor'),
@@ -58,134 +57,74 @@
                 new Title('Visiting Associate Professor', 'Visiting Associate Professor'),
                 new Title('Visiting Professor', 'Visiting Professor'),
                 new Title('Visiting Assistant Professor', 'Visiting Associate Professo'),
-                new Title('Visiting Professor', 'Visiting Professor'),
+                new Title('Visiting Professor', 'Visiting Professor')
             ]),
 
-            selectedLevel: ko.observable(''), // all selected by default,
+            selectedTitle: ko.observable(''), // all selected by default,
 
-            course_filter: ko.observable(''),
+            name_filter: ko.observable(''),
 
-            courseList: ko.observableArray(),
+            first: ko.observable(''),
+            last: ko.observable(''),
 
-            addPrereq: function (id, prereq) {
 
-                courseModelObj.AddPrereq(id,
-                    prereq.id,
-                    function (result) {
+            instructorList: ko.observableArray(),
 
-                        if (result == "ok") {
-                            alert("Added pre-requisite successfully");
-                            window.location.href = '/Schedule/CourseDetails/' + id; //relative to domain
+            getDetail: function (id) {
+                instructorModelObj.GetDetail(id,
+                   function (data) {
+                       self.instructorViewModel.first(data.first_name);
+                       self.instructorViewModel.last(data.last_name);
 
-                        } else if (result == "duplicate") {
-                            alert("Pre-requisite already added")
-                        }
-                        else {
-                            alert("Error occurred");
-                        }
-                    });
+                       self.instructorViewModel.display_name(data.first_name + ' ' + data.last_name);
+                       debugger;
+                       self.instructorViewModel.selectedTitle(
+                           self.instructorViewModel.availableTitlesWithoutAll().find(
+                            function (title) {
+                                return title.value == data.title;
+                            }));
+
+
+                   });
             },
+
 
             filter: function () {
 
-                courseModelObj.Filter(self.courseViewModel.course_filter(),
-                    self.courseViewModel.selectedLevel().value,
-                    function (courseListData) {
+                instructorModelObj.Filter(self.instructorViewModel.name_filter(),
+                    self.instructorViewModel.selectedTitle().value,
+                    function (instructorData) {
 
-                        self.courseViewModel.courseList.removeAll();
+                        self.instructorViewModel.instructorList.removeAll();
 
                         // DTO from the JSON model to the view model. In this case, courseListViewModel doesn't need the "id" attribute
-                        for (var i = 0; i < courseListData.length; i++) {
-                            self.courseViewModel.courseList.push(
+                        for (var i = 0; i < instructorData.length; i++) {
+                            self.instructorViewModel.instructorList.push(
                                 {
-                                    title: courseListData[i].course_title,
-                                    description: courseListData[i].course_description,
-                                    level: courseListData[i].course_level,
-                                    id: courseListData[i].course_id
+                                    title: instructorData[i].title,
+                                    name: instructorData[i].first_name + ' ' + instructorData[i].last_name,
+                                    id: instructorData[i].instructor_id
                                 }
                             );
                         }
                     });
             },
 
-            removePrereq: function (id, prereq) {
-
-
-                courseModelObj.RemovePrereq(id,
-                    prereq.id,
-                    function (result) {
-
-
-
-                        if (result == "ok") {
-                            self.courseViewModel.getDetail(id);
-
-                            setTimeout(function () {
-
-                                alert("Removed pre-requisiste successfully");
-
-                            }, 100);
-                        } else {
-                            alert("Error occurred");
-                        }
-
-
-
-                    });
-            },
-
-            getDetail: function (id) {
-                courseModelObj.GetDetail(id,
-                   function (courseData) {
-
-                       self.courseViewModel.prereqs.removeAll();
-                       self.courseViewModel.course(courseData.course_title);
-                       self.courseViewModel.course_title(courseData.course_title);
-
-                       self.courseViewModel.course_description(courseData.course_description);
-                       debugger;
-                       self.courseViewModel.selectedLevel(
-                           self.courseViewModel.availableLevelsWithoutAll().find(
-                            function (level) {
-                                return level.value == courseData.course_level;
-                            }));
-
-                       debugger;
-                       // DTO from the JSON model to the view model. In this case, courseListViewModel doesn't need the "id" attribute
-                       for (var i = 0; i < courseData.prereqs.length; i++) {
-                           debugger;
-                           self.courseViewModel.prereqs.push(
-                               {
-                                   title: courseData.prereqs[i].course_title,
-                                   description: courseData.prereqs[i].course_description,
-                                   level: courseData.prereqs[i].course_level,
-                                   id: courseData.prereqs[i].course_id
-                               }
-                           );
-                       }
-                   });
-            },
 
             edit: function (id, data) {
                 debugger;
                 var model = {
-                    course_id: id,
-                    course_title: data.viewModel.course(),
-                    course_description: data.viewModel.course_description(),
-                    course_level: data.viewModel.selectedLevel().value
+                    instructor_id: id,
+                    first_name: data.viewModel.first(),
+                    last_name: data.viewModel.last(),
+                    title: data.viewModel.selectedTitle().value
                 };
 
-                courseModelObj.Edit(model, function (result) {
+                instructorModelObj.Edit(model, function (result) {
                     if (result == "ok") {
-                        debugger;
-                        data.viewModel.course_title(data.viewModel.course());
-
-                        setTimeout(function () {
-
-                            alert("Edited course successful");
 
 
-                        }, 100);
+                        alert("Edited instructor successful");
 
 
                     } else {
@@ -198,19 +137,19 @@
             add: function (data) {
                 debugger;
                 var model = {
-                    course_id: 0,
-                    course_title: data.viewModel.course(),
-                    course_description: data.viewModel.course_description(),
-                    course_level: data.viewModel.selectedLevel().value
+                    instructor_id: 0,
+                    first_name: data.viewModel.first(),
+                    last_name: data.viewModel.last(),
+                    title: data.viewModel.selectedTitle().value
                 };
 
-                courseModelObj.Add(model, function (result) {
+                instructorModelObj.Add(model, function (result) {
                     if (result == "ok") {
                         debugger;
 
-                        alert("Added course successful");
+                        alert("Added instructor successful");
 
-                        window.location.href = '/Schedule/CourseList'; //relative to domain
+                        window.location.href = '/Staff/InstructorList'; //relative to domain
 
 
                     } else {
@@ -225,7 +164,7 @@
 
         if (initialBind) {
             // this is using knockoutjs to bind the viewModel and the view
-            ko.applyBindings({ viewModel: self.courseViewModel }, document.getElementById("courseViewModel"));
+            ko.applyBindings({ viewModel: self.instructorViewModel });
             initialBind = false;
         }
     };

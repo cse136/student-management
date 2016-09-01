@@ -84,7 +84,7 @@
           <Key>
             <PropertyRef Name="instructor_id" />
           </Key>
-          <Property Name="instructor_id" Type="int" Nullable="false" />
+          <Property Name="instructor_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="first_name" Type="varchar" MaxLength="50" />
           <Property Name="last_name" Type="varchar" MaxLength="50" />
           <Property Name="title" Type="varchar" MaxLength="50" />

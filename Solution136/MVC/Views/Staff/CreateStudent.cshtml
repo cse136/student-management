@@ -8,86 +8,95 @@
     <li class="active">Add New Student</li>
 </ol>
 
-<h3>Add New Student</h3>
+<div class="col-lg-offset-1"><h3>Add New Student</h3></div>
 <br />
-<form class="form-horizontal">
-    <p>
 
-
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="ssn">SSN</label>
-            <div class="col-sm-10">
-                <input type="password" class="form-control" id="ssn" placeholder="Please type a SSN">
-
+<div id="divStudent">
+    <form class="form-horizontal">
+        <p>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="id">ID</label>
+                <div class="col-sm-10">
+                    <input data-bind="value: student_id" type="text" class="form-control" id="id" placeholder="Please enter student's ID">
+                </div>
             </div>
-        </div>
 
-
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="confirm_ssn">Confirm SSN</label>
-            <div class="col-sm-10">
-                <input type="password" class="form-control" id="confirm_ssn" placeholder="Please type a SSN">
-
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="first_name">First Name</label>
+                <div class="col-sm-10">
+                    <input data-bind="value: first" type="text" class="form-control" id="first_name" placeholder="Please enter student's first name">
+                </div>
             </div>
-        </div>
 
-
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="email">Email</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="email" placeholder="Please type an email">
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="last_name">Last Name</label>
+                <div class="col-sm-10">
+                    <input data-bind="value: last" type="text" class="form-control" id="last_name" placeholder="Please enter student's last name">
+                </div>
             </div>
-        </div>
 
-
-
-
-
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="first_name">First Name</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="first_name" placeholder="Please type first name">
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="email">Email</label>
+                <div class="col-sm-10">
+                    <input data-bind="value: email" type="text" class="form-control" id="email" placeholder="Please enter student's email">
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="last_name">Last Name</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="last_name" placeholder="Please type last name">
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="pass">Password</label>
+                <div class="col-sm-10">
+                    <input data-bind="value: password" type="password" class="form-control" id="pass" placeholder="Please enter student's password">
+                </div>
             </div>
-        </div>
 
-
-
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="shoe_size">Shoe Size</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="shoe_size" placeholder="Please type a shoe size">
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="confirm_pass">Confirm Password</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="confirm_pass" placeholder="Please confirm student's password">
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="weight">Weight</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="weight" placeholder="Please type a weight">
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="ssn">SSN</label>
+                <div class="col-sm-10">
+                    <input data-bind="value: ssn" type="password" class="form-control" id="ssn" placeholder="Please enter student's SSN">
+
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="pass">Password</label>
-            <div class="col-sm-10">
-                <input type="password" class="form-control" id="pass" placeholder="Please type password">
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="confirm_ssn">Confirm SSN</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="confirm_ssn" placeholder="Please confirm student's SSN">
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="confirm_pass">Confirm Password</label>
-            <div class="col-sm-10">
-                <input type="password" class="form-control" id="confirm_pass" placeholder="Please type password">
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="weight">Weight</label>
+                <div class="col-sm-10">
+                    <input data-bind="value: weight" type="text" class="form-control" id="weight" placeholder="Please enter student's weight">
+                </div>
             </div>
-        </div>
 
-        <button type="submit" class="btn btn-default">Add student</button>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="shoe_size">Shoe Size</label>
+                <div class="col-sm-10">
+                    <input data-bind="value: shoesize" type="text" class="form-control" id="shoe_size" placeholder="Please enter student's shoe size">
+                </div>
+            </div>
 
-    </p>
-</form>
+            <br />
+            <div class="col-lg-offset-2">
+                <button data-bind="click: add" type="submit" class="btn btn-default">Add Student</button>
+            </div>
+        </p>
+    </form>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var studentViewModelObj = new StudentViewModel();
+        studentViewModelObj.Initialize();
+    })
+</script>

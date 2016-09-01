@@ -206,46 +206,41 @@
             return student;
         }
 
-        public List<student> GetStudentList(ref List<string> errors)
+        public List<student> GetStudentList(ref List<string> errors, string id = null, string first = null, string last = null, string email = null, double gpa = 0)
         {
-            var conn = new SqlConnection(ConnectionString);
             var studentList = new List<student>();
+            var context = new cse136Entities();
 
             try
             {
-                var adapter = new SqlDataAdapter(GetStudentListProcedure, conn)
-                                  {
-                                      SelectCommand =
-                                          {
-                                              CommandType = CommandType.StoredProcedure
-                                          }
-                                  };
+                var query = context.students.AsQueryable();
 
-                var dataSet = new DataSet();
-                adapter.Fill(dataSet);
-
-                if (dataSet.Tables[0].Rows.Count == 0)
+                if (!string.IsNullOrEmpty(id))
                 {
-                    return null;
+                    query = query.Where(s => s.student_id == id);
                 }
 
-                for (var i = 0; i < dataSet.Tables[0].Rows.Count; i++)
+                if (!string.IsNullOrEmpty(first))
                 {
-                    var student = new student
-                                      {
-                                          student_id = dataSet.Tables[0].Rows[i]["student_id"].ToString(),
-                                          first_name = dataSet.Tables[0].Rows[i]["first_name"].ToString(),
-                                          last_name = dataSet.Tables[0].Rows[i]["last_name"].ToString(),
-                                          ssn = dataSet.Tables[0].Rows[i]["ssn"].ToString(),
-                                          email = dataSet.Tables[0].Rows[i]["email"].ToString(),
-                                          password = dataSet.Tables[0].Rows[i]["password"].ToString(),
-                                          shoe_size =
-                                              (float)
-                                              Convert.ToDouble(dataSet.Tables[0].Rows[i]["shoe_size"].ToString()),
-                                          weight = Convert.ToInt32(dataSet.Tables[0].Rows[i]["weight"].ToString())
-                                      };
-                    studentList.Add(student);
+                    query = query.Where(s => s.first_name.Contains(first));
                 }
+
+                if (!string.IsNullOrEmpty(last))
+                {
+                    query = query.Where(s => s.last_name.Contains(last));
+                }
+
+                if (!string.IsNullOrEmpty(email))
+                {
+                    query = query.Where(s => s.email.Contains(email));
+                }
+
+                //if (!string.IsNullOrEmpty(gpa))
+               // {
+                    //TODO: Get GPA
+               // }
+                studentList = query.ToList();
+
             }
             catch (Exception e)
             {
@@ -253,7 +248,7 @@
             }
             finally
             {
-                conn.Dispose();
+                context.Dispose();
             }
 
             return studentList;

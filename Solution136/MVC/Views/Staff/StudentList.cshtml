@@ -1,11 +1,27 @@
 ﻿@{
+    string userType = null;
+
+    switch (Session["role"].ToString())
+    {
+        case "staff":
+            userType = "Staff";
+            break;
+        case "admin":
+            userType = "Admin";
+            break;
+        default:
+            userType = "Student";
+            break;
+    }
+
+    ViewBag.UserType = userType;
+
     ViewBag.Title = "Browse Students";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <ol class="breadcrumb">
     <li><a href="/">Home</a></li>
-    <li><a href="/Admin?id=1">Admin</a></li>
     <li class="active">Browse Students<li>
 </ol>
 
@@ -14,48 +30,45 @@
 </div>
 <br />
 
-<form class="form-horizontal">
+<form id="student_form" class="form-horizontal">
     <p>
         <div class="form-group">
             <label class="col-sm-2 control-label" for="student_id">Student ID</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="student_id" placeholder="Please type a Student ID">
-
+                <input data-bind="value: viewModel.id" type="text" class="form-control" id="student_id" placeholder="Filter by student ID">
             </div>
         </div>
 
         <div class="form-group">
-            <label class="col-sm-2 control-label" for="ssn">SSN</label>
+            <label class="col-sm-2 control-label" for="first">First Name</label>
             <div class="col-sm-10">
-                <input type="password" class="form-control" id="ssn" placeholder="Please type a SSN">
-
+                <input data-bind="value: viewModel.first" type="text" class="form-control" id="first" placeholder="Filter by first name">
             </div>
         </div>
 
         <div class="form-group">
-            <label class="col-sm-2 control-label" for="name">Name</label>
+            <label class="col-sm-2 control-label" for="name">Last Name</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="name" placeholder="Please type a name">
-
+                <input data-bind="value: viewModel.last" type="text" class="form-control" id="last" placeholder="Filter by name">
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-sm-2 control-label" for="email">Email</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="email" placeholder="Please type an email">
+                <input data-bind="value: viewModel.email" type="text" class="form-control" id="email" placeholder="Filter by email">
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-sm-2 control-label" for="gpa">Minimum GPA</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="gpa" placeholder="Please type a GPA">
+                <input type="text" class="form-control" id="gpa" placeholder="Filter by minimum GPA">
             </div>
         </div>
 
         <div class="col-lg-offset-2">
-            <button type="submit" class="btn btn-default">Filter students</button>
+            <button data-bind="click: viewModel.filter" type="submit" class="btn btn-default">Filter Students</button>
         </div>
 
     </p>
@@ -69,10 +82,10 @@
                 Student ID
             </th>
             <th>
-                SSN
+                First Name
             </th>
             <th>
-                Name
+                Last Name
             </th>
             <th>
                 Email
@@ -89,14 +102,14 @@
             <th>
                 Details
             </th>
-            <th></th>           
+            <th></th>
         </tr>
 
-        <tbody data-bind="foreach: viewModel">
+        <tbody data-bind="foreach: viewModel.studentList">
             <tr>
                 <td data-bind="text: id"></td>
-                <td data-bind="text: ssn"></td>
-                <td data-bind="text: name"></td>
+                <td data-bind="text: first"></td>
+                <td data-bind="text: last"></td>
                 <td data-bind="text: email"></td>
                 <td data-bind="text: shoesize"></td>
                 <td data-bind="text: weight"></td>
@@ -117,6 +130,8 @@
 <script type="text/javascript">
     $(document).ready(function () {
         var studentViewModelObj = new StudentViewModel();
-        studentViewModelObj.GetAll();
+        studentViewModelObj.Initialize();
+        studentViewModelObj.studentListViewModel.filter();
+
     })
 </script>

@@ -26,14 +26,14 @@
 
     this.CreateStudent = function(data) {
         var model = {
-            StudentId: data.id(),
-            SSN: data.ssn(),
-            FirstName: data.first(),
-            LastName: data.last(),
-            Email: data.email(),
-            Password: data.password(),
-            ShoeSize: data.shoesize(),
-            Weight: data.weight()
+            id: data.student_id(),
+            ssn: data.ssn(),
+            first: data.first_name(),
+            last: data.last_name(),
+            email: data.email(),
+            password: data.password(),
+            shoesize: data.shoe_size(),
+            weight: data.weight()
         }
 
         StudentModelObj.Create(model, function(result) {
@@ -43,7 +43,6 @@
                 alert("Error occurred");
             }
         });
-
     };
 
     this.GetAll = function() {

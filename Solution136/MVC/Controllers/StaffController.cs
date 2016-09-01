@@ -3,6 +3,7 @@
     using MVC.App_Start;
     using System.Web.Mvc;
 
+    [CustomAuthorizeAttribute(RoleList = new string[] { "admin", "staff" })]
     public class StaffController : Controller
     {
         public ActionResult AddTAToScheduledCourse()
@@ -29,7 +30,6 @@
         {
             return this.View();
         }
-
 
         public ActionResult EditTA(string id)
         {

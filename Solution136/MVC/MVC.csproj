@@ -187,7 +187,7 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\Errors\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Staff\StudentList.cshtml" />
@@ -214,16 +214,19 @@
     <Content Include="Views\Staff\AddTAToScheduledCourse.cshtml" />
     <Content Include="Views\Student\CreateReview.cshtml" />
     <Content Include="Views\Staff\InstructorList.cshtml" />
-    <Content Include="Views\Schedule\ScheduledCourseStudentList.cshtml" />
+    <Content Include="Views\Schedule\ScheduledCourseDetails.cshtml" />
     <Content Include="Views\Schedule\ScheduledCourseReviews.cshtml" />
     <Content Include="Views\Staff\TADetails.cshtml" />
     <Content Include="Views\Student\AddTutorToScheduledCourse.cshtml" />
     <Content Include="Views\Shared\SharedCreateTA.cshtml" />
     <Content Include="Views\Staff\EditScheduledCourse.cshtml" />
     <Content Include="Views\Staff\CreateScheduledCourse.cshtml" />
+    <Content Include="Views\Shared\Errors\Error404.cshtml" />
+    <Content Include="Views\Shared\Errors\Error403.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Errors\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

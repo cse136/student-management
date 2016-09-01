@@ -1,14 +1,30 @@
 ﻿@{
-    ViewBag.Title = "Admin";
+    string userType = null;
+
+    switch (Session["role"].ToString())
+    {
+        case "staff":
+            userType = "Staff";
+            break;
+        case "admin":
+            userType = "Admin";
+            break;
+        default:
+            userType = "Student";
+            break;
+    }
+
+    ViewBag.UserType = userType;
+
+    ViewBag.Title = userType;
 }
 
 <ol class="breadcrumb">
-    <li><a href="/">Home</a></li>
-    <li class="active">Admin</li>
+    <li class="active">Home</li>
 </ol>
 
 
-<h3>Welcome Admin</h3>
+<h3>Welcome @ViewBag.UserType</h3>
 <br />
 <p>What would you like to do?</p>
 
@@ -18,8 +34,13 @@
             Courses
         </h4>
         <ul>
-            <li><a href="/Admin/CourseList">Browse courses</a></li>
-            <li><a href="/Admin/CreateCourse">Add new course</a></li>
+            <li><a href="/Schedule/CourseList">Browse courses</a></li>
+
+            @if (ViewBag.UserType == "Admin")
+            {
+            
+                <li><a href="/Admin/CreateCourse">Add new course</a></li>
+            }
         </ul>
     </div>
     <div class="col-md-4">
@@ -27,8 +48,15 @@
             Instructors
         </h4>
         <ul>
-            <li><a href="/Admin/InstructorList">Browse instructors</a></li>
-            <li><a href="/Admin/CreateInstructor">Add new instructor</a></li>
+            @if (ViewBag.UserType == "Staff" || ViewBag.UserType == "Admin")
+            { 
+                <li><a href="/Staff/InstructorList">Browse instructors</a></li>
+            }
+            
+            @if (ViewBag.UserType == "Admin")
+            {
+                <li><a href="/Admin/CreateInstructor">Add new instructor</a></li>
+            }
         </ul>
     </div>
     <div class="col-md-4">
@@ -36,28 +64,39 @@
             Course Schedule
         </h4>
         <ul>
-            <li><a href="/Admin/ScheduledCourseList">Browse course schedule</a></li>
-            <li><a href="/Admin/CreateScheduledCourse">Schedule a course</a></li>
+            
+            <li><a href="/Schedule/">Browse course schedule</a></li>
+            
+            @if (ViewBag.UserType == "Staff"|| ViewBag.UserType == "Admin")
+            {
+                <li><a href="/Staff/CreateScheduledCourse">Schedule a course</a></li>
+            }
         </ul>
     </div>
+
+    @if (ViewBag.UserType == "Staff" || ViewBag.UserType == "Admin")
+    {
     <div class="col-md-4">
         <h4>
             Students
         </h4>
         <ul>
-            <li><a href="/Admin/StudentList">Browse students</a></li>
-            <li><a href="/Admin/CreateStudent">Add new student</a></li>
+            
+            <li><a href="/Staff/StudentList">Browse students</a></li>
+            <li><a href="/Staff/CreateStudent">Add new student</a></li>
         </ul>
     </div>
+    
     <div class="col-md-4">
         <h4>
             TAs
         </h4>
         <ul>
-            <li><a href="/Admin/TAList">Browse TAs</a></li>
-            <li><a href="/Admin/CreateTA">Add new TA</a></li>
+            <li><a href="/Staff/TAList">Browse TAs</a></li>
+            <li><a href="/Staff/CreateTA">Add new TA</a></li>
         </ul>
     </div>
+    }
 </div>
 
 

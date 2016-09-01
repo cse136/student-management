@@ -9,8 +9,11 @@
     <li class="active">Browse Students<li>
 </ol>
 
-<h3>Browse Students</h3>
+<div class="col-lg-offset-1">
+    <h3>Browse Students</h3>
+</div>
 <br />
+
 <form class="form-horizontal">
     <p>
         <div class="form-group">
@@ -37,7 +40,6 @@
             </div>
         </div>
 
-
         <div class="form-group">
             <label class="col-sm-2 control-label" for="email">Email</label>
             <div class="col-sm-10">
@@ -52,10 +54,13 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-default">Filter students</button>
+        <div class="col-lg-offset-2">
+            <button type="submit" class="btn btn-default">Filter students</button>
+        </div>
 
     </p>
 </form>
+<br />
 
 <p>
     <table class="table" id="students">
@@ -81,39 +86,37 @@
             <th>
                 GPA
             </th>
-           
+            <th>
+                Details
+            </th>
+            <th></th>           
         </tr>
-        <tr>
-            <td>
-                A000001
-            </td>
-            <td>
-                123456789
-            </td>
-            <td>
-                John Doe
-            </td>
-            <td>
-                xx1@ucsd.edu
-            </td>
-            <td>
-                9
-            </td>
-            <td>
-                100
-            </td>
-            <td>
-                4.0
-            </td>
-            <td>
-                <a href="/Admin/StudentDetails?id=1">View details</a>
-            </td>
-            <td>
-                <a href="/Admin/EditStudent?id=10">Edit</a>
-            </td>
-            
-        </tr>
+
+        <tbody data-bind="foreach: viewModel">
+            <tr>
+                <td data-bind="text: id"></td>
+                <td data-bind="text: ssn"></td>
+                <td data-bind="text: name"></td>
+                <td data-bind="text: email"></td>
+                <td data-bind="text: shoesize"></td>
+                <td data-bind="text: weight"></td>
+                <td>
+                    4.0
+                </td>
+                <td>
+                    <a href="/Admin/StudentDetails?id=1">View</a>
+                </td>
+                <td>
+                    <a href="/Admin/EditStudent?id=10">Edit</a>
+                </td>
+            </tr>
+        </tbody>
     </table>
 </p>
 
-
+<script type="text/javascript">
+    $(document).ready(function () {
+        var studentViewModelObj = new StudentViewModel();
+        studentViewModelObj.GetAll();
+    })
+</script>

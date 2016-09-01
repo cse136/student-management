@@ -53,15 +53,17 @@
 
             for (var i = 0; i < studentList.length; i++) {
                 studentListViewModel.push({
-                    id: studentList[i].StudentId,
-                    first: studentList[i].FirstName,
-                    last: studentList[i].LastName,
-                    email: studentList[i].Email
+                    id: studentList[i].student_id,
+                    ssn: studentList[i].ssn,
+                    name: studentList[i].first_name + ' ' + studentList[i].last_name,
+                    email: studentList[i].email,
+                    shoesize: studentList[i].shoe_size,
+                    weight: studentList[i].weight
                 });
             }
 
             if (initialBind) {
-                ko.applyBindings({ viewModel: studentListViewModel }, document.getElementById("divStudentListContent"));
+                ko.applyBindings({ viewModel: studentListViewModel }, document.getElementById("students"));
                 initialBind = false; // this is to prevent binding multiple time because "Delete" functio calls GetAll again
             }
         });

@@ -1,10 +1,27 @@
 ﻿@{
+
+    string userType = null;
+
+    switch (Session["role"].ToString())
+    {
+        case "staff":
+            userType = "Staff";
+            break;
+        case "admin":
+            userType = "Admin";
+            break;
+        default:
+            userType = "Student";
+            break;
+    }
+
+    ViewBag.UserType = userType;
+
     ViewBag.Title = "Add New TA";
 }
 
 <ol class="breadcrumb">
     <li><a href="/">Home</a></li>
-    <li><a href="/Admin?id=1">Admin</a></li>
     <li class="active">Add New TA</li>
 </ol>
 
@@ -12,39 +29,41 @@
 <br />
 <form class="form-horizontal">
     <p>
-
-
         <div class="form-group">
             <label class="col-sm-2 control-label" for="first_name">First Name</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="first_name" placeholder="Please type first name">
+                <input data-bind="value: viewModel.first" type="text" class="form-control" id="first_name" placeholder="Please type first name">
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-sm-2 control-label" for="last_name">Last Name</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="last_name" placeholder="Please type last name">
+                <input data-bind="value: viewModel.last" type="text" class="form-control" id="last_name" placeholder="Please type last name">
             </div>
         </div>
-
 
         <div class="form-group">
             <label class="col-sm-2 control-label" for="type">Type</label>
             <div class="col-sm-10">
-                <select class="form-control" id="level">
-                    <option value="" selected="selected">Select</option>
-
-                    <option value="lower">Lower</option>
-                    <option value="upper">Upper</option>
-                    <option value="grad">Graduate</option>
-                </select>
+                <select data-bind="options: viewModel.availableLevelsWithoutAll,
+                                        optionsText: 'displayName',
+                                        value: viewModel.selectedLevel,
+                                        optionsCaption: 'Select a Level'"
+                        class="form-control" id="level"></select>
             </div>
         </div>
 
-
-
-        <button type="submit" class="btn btn-default">Add TA</button>
-
+        <button type="submit" data-bind="click: viewModel.add.bind($data)" class="btn btn-default">Add TA</button>
     </p>
 </form>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        var courseViewModelObj =
+            new CourseViewModel();
+        courseViewModelObj.Initialize();
+    });
+</script>

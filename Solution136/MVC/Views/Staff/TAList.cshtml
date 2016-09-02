@@ -1,11 +1,27 @@
 ﻿@{
+    string userType = null;
+
+    switch (Session["role"].ToString())
+    {
+        case "staff":
+            userType = "Staff";
+            break;
+        case "admin":
+            userType = "Admin";
+            break;
+        default:
+            userType = "Student";
+            break;
+    }
+
+    ViewBag.UserType = userType;
+
+
     ViewBag.Title = "Browse TAs";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <ol class="breadcrumb">
     <li><a href="/">Home</a></li>
-    <li><a href="/Admin?id=1">Admin</a></li>
     <li class="active">Browse TAs
     <li>
 </ol>
@@ -59,9 +75,9 @@
             <th></th>
         </tr>
 
-        <tbody data-bind="foreach: viewModel">
+        <tbody data-bind="foreach: viewModel.taList">
             <tr>
-                <td data-bind="text: name"></td>
+                <td data-bind="text: first"></td>
                 <td data-bind="text: type"></td>
                 <td>
                     <a href="/Admin/TADetails?id=10">View</a>
@@ -77,6 +93,6 @@
 <script type="text/javascript">
     $(document).ready(function () {
         var studentViewModelObj = new StudentViewModel();
-        studentViewModelObj.GetAll();
+        studentViewModelObj.Initialize();
     })
 </script>
